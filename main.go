@@ -1,13 +1,13 @@
 package main
 
 import (
-    router "github.com/ssoyyoung.p/tree/router"
+	router "github.com/ssoyyoung.p/GoDirectory/router"
 )
 
 func main() {
-	echo_r := router.Router()
+	echoR := router.Router()
 
-    // Start echo server..
-    echo_r.Logger.Fatal(echo_r.Start(":1323"))
+	// Start echo server..
+	echoR.Logger.Fatal(echoR.Start(":1323"))
 
 }
