@@ -3,9 +3,9 @@ package router
 import (
 	"net/http"
 
-	"github.com/labstack/echo"
+	echo "github.com/labstack/echo"
 	middleware "github.com/labstack/echo/middleware"
-	h "github.com/ssoyyoung.p/GoDirectory/handler"
+	handler "github.com/ssoyyoung.p/GoDirectory/handler"
 )
 
 //Router function
@@ -25,12 +25,12 @@ func Router() *echo.Echo {
 	}))
 
 	//Router List
-	e.GET("/", h.TestPage)
-	e.GET("/getStreamers", h.GetStreamers)
-	e.GET("/getStreamer/:id", h.GetStreamerByID)
-	e.GET("/deleteStreamer/:id", h.DeleteStreamer)
-	e.POST("/updateStreamer/:id", h.UpdateStreamer)
-	e.POST("/createStreamer", h.CreateStreamer)
+	e.GET("/", handler.TestPage)
+	e.GET("/getStreamers", handler.GetStreamers)
+	e.GET("/getStreamer/:id", handler.GetStreamerByID)
+	e.GET("/deleteStreamer/:id", handler.DeleteStreamer)
+	e.POST("/updateStreamer/:id", handler.UpdateStreamer)
+	e.POST("/createStreamer", handler.CreateStreamer)
 
 	return e
 }

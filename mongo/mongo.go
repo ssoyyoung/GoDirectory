@@ -65,22 +65,34 @@ func connectDB() (client *mongo.Client, ctx context.Context, cancel context.Canc
 	return client, ctx, cancel
 }
 
+// get Crawl_target collection
 func getCollectionCrawl(client *mongo.Client) *mongo.Collection {
 	return client.Database(dbName).Collection(colNameCrawl)
 }
 
+// get Live_live collection
 func getCollectionLive(client *mongo.Client) *mongo.Collection {
 	return client.Database(dbName).Collection(colNameLive)
 }
 
+// define bson.M type data
 var datas []bson.M
 
+// jsonData marshal to string func
 func jsonMarshalString(datas []bson.M) string {
 	jsonBytes, err := json.Marshal(datas)
 	checkErr(err)
 	jsonString := string(jsonBytes)
 
 	return jsonString
+}
+
+// string ID convert to OjectID
+func convertID(id string) primitive.ObjectID {
+	docID, err := primitive.ObjectIDFromHex(id)
+	checkErr(err)
+
+	return docID
 }
 
 // CrawlList func
@@ -105,13 +117,8 @@ func SearchDBbyID(id string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	// _id type 변환작업
-	docID, err := primitive.ObjectIDFromHex(id)
-	checkErr(err)
-
-	res, _ := getCollectionCrawl(client).Find(ctx, bson.M{"_id": docID})
-
-	if err = res.All(ctx, &datas); err != nil {
+	res, _ := getCollectionCrawl(client).Find(ctx, bson.M{"_id": convertID(id)})
+	if err := res.All(ctx, &datas); err != nil {
 		fmt.Println(err)
 	}
 
@@ -124,10 +131,7 @@ func DeleteDBbyID(id string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	// _id type 변환작업
-	docID, _ := primitive.ObjectIDFromHex(id)
-
-	_, err := getCollectionCrawl(client).DeleteOne(ctx, bson.M{"_id": docID})
+	_, err := getCollectionCrawl(client).DeleteOne(ctx, bson.M{"_id": convertID(id)})
 	checkErr(err)
 
 	return "Delete!"
@@ -139,9 +143,7 @@ func UpdateDBbyID(id, platform, channel, channelID string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	docID, _ := primitive.ObjectIDFromHex(id)
-
-	filter := bson.M{"_id": docID}
+	filter := bson.M{"_id": convertID(id)}
 	update := bson.D{
 		{"$set", bson.D{
 			{"platform", platform},
