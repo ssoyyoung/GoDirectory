@@ -95,8 +95,27 @@ func convertID(id string) primitive.ObjectID {
 	return docID
 }
 
-// CrawlList func
-func CrawlList() string {
+// LiveList func
+func LiveList() string {
+	client, ctx, cancel := connectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	findOptions := options.Find()
+	findOptions.SetSort(bson.D{{"liveAttdc", -1}})
+
+	res, err := getCollectionLive(client).Find(ctx, bson.M{"onLive": true}, findOptions)
+	checkErr(err)
+
+	if err = res.All(ctx, &datas); err != nil {
+		fmt.Println(err)
+	}
+
+	return jsonMarshalString(datas)
+}
+
+// AdminList func
+func AdminList() string {
 	client, ctx, cancel := connectDB()
 	defer client.Disconnect(ctx)
 	defer cancel()

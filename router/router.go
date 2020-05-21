@@ -14,7 +14,6 @@ func Router() *echo.Echo {
 
 	//Setting logger
 	e.Use(middleware.Logger())
-
 	//Recover from panics anywhere in the chain
 	e.Use(middleware.Recover())
 
@@ -26,6 +25,9 @@ func Router() *echo.Echo {
 
 	//Router List
 	e.GET("/", handler.TestPage)
+	//Main Page Request
+	e.GET("/getList", handler.GetSteamer)
+	//Admin Page Request
 	e.GET("/getStreamers", handler.GetStreamers)
 	e.GET("/getStreamer/:id", handler.GetStreamerByID)
 	e.GET("/deleteStreamer/:id", handler.DeleteStreamer)
