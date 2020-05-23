@@ -24,7 +24,12 @@ const colNameLive = "live_list"
 const colNameCrawl = "crawl_target"
 const colNameUser = "user_info"
 
-// get MongoDB Authorization info
+// get Collection
+func getCollection(client *mongo.Client, colName string) *mongo.Collection {
+	return client.Database(dbName).Collection(colName)
+}
+
+// get MongoDB Authorization info7
 func getAuth() m.Auth {
 	data, err := os.Open("mongo/mongodb_auth.json")
 	checkErr(err)
@@ -66,21 +71,6 @@ func connectDB() (client *mongo.Client, ctx context.Context, cancel context.Canc
 	return client, ctx, cancel
 }
 
-// get Crawl_target collection
-func getCollectionCrawl(client *mongo.Client) *mongo.Collection {
-	return client.Database(dbName).Collection(colNameCrawl)
-}
-
-// get Live_live collection
-func getCollectionLive(client *mongo.Client) *mongo.Collection {
-	return client.Database(dbName).Collection(colNameLive)
-}
-
-// get User_info collection
-func getCollectionUser(client *mongo.Client) *mongo.Collection {
-	return client.Database(dbName).Collection(colNameUser)
-}
-
 // define bson.M type data
 var datas []bson.M
 
@@ -110,7 +100,7 @@ func LiveTrueList() string {
 	findOptions := options.Find()
 	findOptions.SetSort(bson.D{{"liveAttdc", -1}})
 
-	res, err := getCollectionLive(client).Find(ctx, bson.M{"onLive": true}, findOptions)
+	res, err := getCollection(client, colNameLive).Find(ctx, bson.M{"onLive": true}, findOptions)
 	checkErr(err)
 
 	if err = res.All(ctx, &datas); err != nil {
@@ -126,7 +116,7 @@ func LiveAllList() string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	res, err := getCollectionCrawl(client).Find(ctx, bson.M{})
+	res, err := getCollection(client, colNameCrawl).Find(ctx, bson.M{})
 	checkErr(err)
 
 	if err = res.All(ctx, &datas); err != nil {
@@ -142,7 +132,7 @@ func SearchDBbyID(id string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	res, _ := getCollectionCrawl(client).Find(ctx, bson.M{"_id": convertID(id)})
+	res, _ := getCollection(client, colNameCrawl).Find(ctx, bson.M{"_id": convertID(id)})
 	if err := res.All(ctx, &datas); err != nil {
 		fmt.Println(err)
 	}
@@ -156,7 +146,7 @@ func DeleteDBbyID(id string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	_, err := getCollectionCrawl(client).DeleteOne(ctx, bson.M{"_id": convertID(id)})
+	_, err := getCollection(client, colNameCrawl).DeleteOne(ctx, bson.M{"_id": convertID(id)})
 	checkErr(err)
 
 	return "Delete!"
@@ -177,7 +167,7 @@ func UpdateDBbyID(id, platform, channel, channelID string) string {
 		},
 		},
 	}
-	_, err := getCollectionCrawl(client).UpdateOne(ctx, filter, update)
+	_, err := getCollection(client, colNameCrawl).UpdateOne(ctx, filter, update)
 	checkErr(err)
 
 	return "Update!"
@@ -194,7 +184,7 @@ func CreateDB(platform, channel, channelID string) string {
 		Channel:   channel,
 		ChannelID: channelID,
 	}
-	_, err := getCollectionCrawl(client).InsertOne(ctx, newData)
+	_, err := getCollection(client, colNameCrawl).InsertOne(ctx, newData)
 	checkErr(err)
 
 	return "create!"
@@ -206,7 +196,7 @@ func CheckUser(googleID, name, email string) bool {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	res, err := getCollectionUser(client).CountDocuments(ctx, bson.M{"googleId": googleID, "name": name})
+	res, err := getCollection(client, colNameUser).CountDocuments(ctx, bson.M{"googleId": googleID, "name": name})
 	checkErr(err)
 	if res == 0 {
 		createUser(googleID, name, email)
@@ -220,7 +210,7 @@ func createUser(googleID, name, email string) {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	_, err := getCollectionUser(client).InsertOne(ctx, bson.M{
+	_, err := getCollection(client, colNameUser).InsertOne(ctx, bson.M{
 		"googleId": googleID,
 		"name":     name,
 		"email":    email,
@@ -234,17 +224,14 @@ func UpdateUser(googleID, token string) {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	userInfo := client.Database("meerkatonair").Collection("user_info")
-
 	filter := bson.M{"googleId": googleID}
-
 	update := bson.D{
 		{"$set", bson.D{
 			{"token", token},
 		},
 		},
 	}
-	res, err := userInfo.UpdateOne(ctx, filter, update)
+	res, err := getCollection(client, colNameUser).UpdateOne(ctx, filter, update)
 	fmt.Println(res)
 	checkErr(err)
 }
