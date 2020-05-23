@@ -6,6 +6,7 @@ import (
 	echo "github.com/labstack/echo"
 	middleware "github.com/labstack/echo/middleware"
 	handler "github.com/ssoyyoung.p/GoDirectory/handler"
+	login "github.com/ssoyyoung.p/GoDirectory/login"
 )
 
 //Router function
@@ -25,14 +26,19 @@ func Router() *echo.Echo {
 
 	//Router List
 	e.GET("/", handler.TestPage)
+
 	//Main Page Request
 	e.GET("/getList", handler.GetSteamer)
+
 	//Admin Page Request
-	e.GET("/getStreamers", handler.GetStreamers)
-	e.GET("/getStreamer/:id", handler.GetStreamerByID)
-	e.GET("/deleteStreamer/:id", handler.DeleteStreamer)
-	e.POST("/updateStreamer/:id", handler.UpdateStreamer)
-	e.POST("/createStreamer", handler.CreateStreamer)
+	e.GET("/getStreamers", handler.GetStreamers, login.IsLoggedIn)
+	e.GET("/getStreamer/:id", handler.GetStreamerByID, login.IsLoggedIn)
+	e.GET("/deleteStreamer/:id", handler.DeleteStreamer, login.IsLoggedIn)
+	e.POST("/updateStreamer/:id", handler.UpdateStreamer, login.IsLoggedIn)
+	e.POST("/createStreamer", handler.CreateStreamer, login.IsLoggedIn)
+
+	//Login Request
+	e.POST("/login", login.GoogleLogin)
 
 	return e
 }

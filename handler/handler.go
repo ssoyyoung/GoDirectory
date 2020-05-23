@@ -16,14 +16,14 @@ func TestPage(c echo.Context) error {
 
 // GetSteamer func
 func GetSteamer(c echo.Context) error {
-	res := mongodb.LiveList() //Get live data (desc)
+	res := mongodb.LiveTrueList() //Get live data (desc)
 
 	return c.String(http.StatusOK, res)
 }
 
 // GetStreamers func
 func GetStreamers(c echo.Context) error {
-	res := mongodb.AdminList() //Get all data
+	res := mongodb.LiveAllList() //Get all data
 
 	return c.String(http.StatusOK, res)
 }

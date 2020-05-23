@@ -22,6 +22,7 @@ const dbName = "meerkatonair"
 // Collection name
 const colNameLive = "live_list"
 const colNameCrawl = "crawl_target"
+const colNameUser = "user_info"
 
 // get MongoDB Authorization info
 func getAuth() m.Auth {
@@ -75,6 +76,11 @@ func getCollectionLive(client *mongo.Client) *mongo.Collection {
 	return client.Database(dbName).Collection(colNameLive)
 }
 
+// get User_info collection
+func getCollectionUser(client *mongo.Client) *mongo.Collection {
+	return client.Database(dbName).Collection(colNameUser)
+}
+
 // define bson.M type data
 var datas []bson.M
 
@@ -96,7 +102,7 @@ func convertID(id string) primitive.ObjectID {
 }
 
 // LiveList func
-func LiveList() string {
+func LiveTrueList() string {
 	client, ctx, cancel := connectDB()
 	defer client.Disconnect(ctx)
 	defer cancel()
@@ -114,8 +120,8 @@ func LiveList() string {
 	return jsonMarshalString(datas)
 }
 
-// AdminList func
-func AdminList() string {
+// AllList func
+func LiveAllList() string {
 	client, ctx, cancel := connectDB()
 	defer client.Disconnect(ctx)
 	defer cancel()
@@ -192,4 +198,53 @@ func CreateDB(platform, channel, channelID string) string {
 	checkErr(err)
 
 	return "create!"
+}
+
+//CheckUser func
+func CheckUser(googleID, name, email string) bool {
+	client, ctx, cancel := connectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	res, err := getCollectionUser(client).CountDocuments(ctx, bson.M{"googleId": googleID, "name": name})
+	checkErr(err)
+	if res == 0 {
+		createUser(googleID, name, email)
+	}
+	return true
+}
+
+// createUser func
+func createUser(googleID, name, email string) {
+	client, ctx, cancel := connectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	_, err := getCollectionUser(client).InsertOne(ctx, bson.M{
+		"googleId": googleID,
+		"name":     name,
+		"email":    email,
+	})
+	checkErr(err)
+}
+
+// UpdateUser
+func UpdateUser(googleID, token string) {
+	client, ctx, cancel := connectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	userInfo := client.Database("meerkatonair").Collection("user_info")
+
+	filter := bson.M{"googleId": googleID}
+
+	update := bson.D{
+		{"$set", bson.D{
+			{"token", token},
+		},
+		},
+	}
+	res, err := userInfo.UpdateOne(ctx, filter, update)
+	fmt.Println(res)
+	checkErr(err)
 }
