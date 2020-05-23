@@ -9,8 +9,8 @@ import (
 	"time"
 
 	m "github.com/ssoyyoung.p/GoDirectory/models"
+	U "github.com/ssoyyoung.p/GoDirectory/utils"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -32,20 +32,13 @@ func getCollection(client *mongo.Client, colName string) *mongo.Collection {
 // get MongoDB Authorization info7
 func getAuth() m.Auth {
 	data, err := os.Open("mongo/mongodb_auth.json")
-	checkErr(err)
+	U.CheckErr(err)
 
 	var auth m.Auth
 	byteValue, _ := ioutil.ReadAll(data)
 	json.Unmarshal(byteValue, &auth)
 
 	return auth
-}
-
-// checkErr function
-func checkErr(err error) {
-	if err != nil {
-		fmt.Println(err)
-	}
 }
 
 // connect to MongoDB
@@ -63,10 +56,10 @@ func connectDB() (client *mongo.Client, ctx context.Context, cancel context.Canc
 
 	// MongoDB 연결
 	client, err := mongo.Connect(ctx, clientOptions)
-	checkErr(err)
+	U.CheckErr(err)
 
 	// MongoDB 연결 검증
-	checkErr(client.Ping(ctx, readpref.Primary()))
+	U.CheckErr(client.Ping(ctx, readpref.Primary()))
 
 	return client, ctx, cancel
 }
@@ -74,24 +67,7 @@ func connectDB() (client *mongo.Client, ctx context.Context, cancel context.Canc
 // define bson.M type data
 var datas []bson.M
 
-// jsonData marshal to string func
-func jsonMarshalString(datas []bson.M) string {
-	jsonBytes, err := json.Marshal(datas)
-	checkErr(err)
-	jsonString := string(jsonBytes)
-
-	return jsonString
-}
-
-// string ID convert to OjectID
-func convertID(id string) primitive.ObjectID {
-	docID, err := primitive.ObjectIDFromHex(id)
-	checkErr(err)
-
-	return docID
-}
-
-// LiveList func
+// LiveTrueList func
 func LiveTrueList() string {
 	client, ctx, cancel := connectDB()
 	defer client.Disconnect(ctx)
@@ -101,29 +77,29 @@ func LiveTrueList() string {
 	findOptions.SetSort(bson.D{{"liveAttdc", -1}})
 
 	res, err := getCollection(client, colNameLive).Find(ctx, bson.M{"onLive": true}, findOptions)
-	checkErr(err)
+	U.CheckErr(err)
 
 	if err = res.All(ctx, &datas); err != nil {
 		fmt.Println(err)
 	}
 
-	return jsonMarshalString(datas)
+	return U.JSONMarshalString(datas)
 }
 
-// AllList func
+// LiveAllList func
 func LiveAllList() string {
 	client, ctx, cancel := connectDB()
 	defer client.Disconnect(ctx)
 	defer cancel()
 
 	res, err := getCollection(client, colNameCrawl).Find(ctx, bson.M{})
-	checkErr(err)
+	U.CheckErr(err)
 
 	if err = res.All(ctx, &datas); err != nil {
 		fmt.Println(err)
 	}
 
-	return jsonMarshalString(datas)
+	return U.JSONMarshalString(datas)
 }
 
 // SearchDBbyID func
@@ -132,12 +108,12 @@ func SearchDBbyID(id string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	res, _ := getCollection(client, colNameCrawl).Find(ctx, bson.M{"_id": convertID(id)})
+	res, _ := getCollection(client, colNameCrawl).Find(ctx, bson.M{"_id": U.ConvertID(id)})
 	if err := res.All(ctx, &datas); err != nil {
 		fmt.Println(err)
 	}
 
-	return jsonMarshalString(datas)
+	return U.JSONMarshalString(datas)
 }
 
 // DeleteDBbyID func
@@ -146,8 +122,8 @@ func DeleteDBbyID(id string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	_, err := getCollection(client, colNameCrawl).DeleteOne(ctx, bson.M{"_id": convertID(id)})
-	checkErr(err)
+	_, err := getCollection(client, colNameCrawl).DeleteOne(ctx, bson.M{"_id": U.ConvertID(id)})
+	U.CheckErr(err)
 
 	return "Delete!"
 }
@@ -158,7 +134,7 @@ func UpdateDBbyID(id, platform, channel, channelID string) string {
 	defer client.Disconnect(ctx)
 	defer cancel()
 
-	filter := bson.M{"_id": convertID(id)}
+	filter := bson.M{"_id": U.ConvertID(id)}
 	update := bson.D{
 		{"$set", bson.D{
 			{"platform", platform},
@@ -168,7 +144,7 @@ func UpdateDBbyID(id, platform, channel, channelID string) string {
 		},
 	}
 	_, err := getCollection(client, colNameCrawl).UpdateOne(ctx, filter, update)
-	checkErr(err)
+	U.CheckErr(err)
 
 	return "Update!"
 }
@@ -185,7 +161,7 @@ func CreateDB(platform, channel, channelID string) string {
 		ChannelID: channelID,
 	}
 	_, err := getCollection(client, colNameCrawl).InsertOne(ctx, newData)
-	checkErr(err)
+	U.CheckErr(err)
 
 	return "create!"
 }
@@ -197,7 +173,7 @@ func CheckUser(googleID, name, email string) bool {
 	defer cancel()
 
 	res, err := getCollection(client, colNameUser).CountDocuments(ctx, bson.M{"googleId": googleID, "name": name})
-	checkErr(err)
+	U.CheckErr(err)
 	if res == 0 {
 		createUser(googleID, name, email)
 	}
@@ -215,10 +191,10 @@ func createUser(googleID, name, email string) {
 		"name":     name,
 		"email":    email,
 	})
-	checkErr(err)
+	U.CheckErr(err)
 }
 
-// UpdateUser
+// UpdateUser func
 func UpdateUser(googleID, token string) {
 	client, ctx, cancel := connectDB()
 	defer client.Disconnect(ctx)
@@ -233,5 +209,5 @@ func UpdateUser(googleID, token string) {
 	}
 	res, err := getCollection(client, colNameUser).UpdateOne(ctx, filter, update)
 	fmt.Println(res)
-	checkErr(err)
+	U.CheckErr(err)
 }

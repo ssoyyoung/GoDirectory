@@ -31,7 +31,7 @@ func Router() *echo.Echo {
 	e.GET("/getList", handler.GetSteamer)
 
 	//Admin Page Request
-	e.GET("/getStreamers", handler.GetStreamers, login.IsLoggedIn)
+	e.GET("/getStreamers", handler.GetStreamers)
 	e.GET("/getStreamer/:id", handler.GetStreamerByID, login.IsLoggedIn)
 	e.GET("/deleteStreamer/:id", handler.DeleteStreamer, login.IsLoggedIn)
 	e.POST("/updateStreamer/:id", handler.UpdateStreamer, login.IsLoggedIn)
