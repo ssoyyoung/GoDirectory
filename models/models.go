@@ -15,6 +15,7 @@ type CrawlTarget struct {
 // LiveList struct
 type LiveList struct {
 	ID              primitive.ObjectID `bson:"_id,omitempty"`
+	Uniq            string             `bson:"_uniq,omitempty"`
 	Channel         string             `bson:"channel,omitempty"`
 	ChannelID       string             `bson:"channelID,omitempty"`
 	Platform        string             `bson:"platform,omitempty"`
