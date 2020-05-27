@@ -58,3 +58,13 @@ func CreateStreamer(c echo.Context) error {
 
 	return c.String(http.StatusOK, res)
 }
+
+// UpdateFollwer func
+func UpdateFollower(c echo.Context) error {
+	email := c.Param("email")
+	fmt.Println("email.....", email)
+	fmt.Println("following.....", c.FormValue("following"))
+	res := mongodb.UpdateUserInfo(c.FormValue("following"), email)
+
+	return c.String(http.StatusOK, res)
+}

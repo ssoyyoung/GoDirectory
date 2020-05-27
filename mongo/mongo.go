@@ -211,3 +211,23 @@ func UpdateUser(googleID, token string) {
 	fmt.Println(res)
 	U.CheckErr(err)
 }
+
+// UpdateUserInfo func
+func UpdateUserInfo(following, email string) string {
+	client, ctx, cancel := connectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	filter := bson.M{"email": email}
+	update := bson.D{
+		{"$push", bson.D{
+			{"followingtest", following},
+		},
+		},
+	}
+	// 기존 데이터 유지 한 상태에서 데이터를 더 넣으려면 $push를 사용한다.
+	_, err := getCollection(client, colNameUser).UpdateOne(ctx, filter, update)
+	U.CheckErr(err)
+
+	return "updateUserInfo"
+}

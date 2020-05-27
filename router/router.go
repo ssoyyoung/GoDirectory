@@ -37,6 +37,9 @@ func Router() *echo.Echo {
 	e.POST("/updateStreamer/:id", handler.UpdateStreamer, login.IsLoggedIn)
 	e.POST("/createStreamer", handler.CreateStreamer, login.IsLoggedIn)
 
+	// follow & like Request
+	e.POST("/updateFollower/:email", handler.UpdateFollower)
+
 	//Login Request
 	e.POST("/login", login.GoogleLogin)
 
