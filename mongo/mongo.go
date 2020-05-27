@@ -76,7 +76,35 @@ func LiveTrueList() string {
 	findOptions := options.Find()
 	findOptions.SetSort(bson.D{{"liveAttdc", -1}})
 
-	res, err := getCollection(client, colNameLive).Find(ctx, bson.M{"onLive": true}, findOptions)
+	findQuery := bson.M{"onLive": true}
+	res, err := getCollection(client, colNameLive).Find(ctx, findQuery, findOptions)
+	U.CheckErr(err)
+
+	if err = res.All(ctx, &datas); err != nil {
+		fmt.Println(err)
+	}
+
+	return U.JSONMarshalString(datas)
+}
+
+// LiveTrueListByFollower  func
+func LiveTrueListByFollower(follower []string) string {
+	client, ctx, cancel := connectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	findOptions := options.Find().SetSort(bson.M{"liveAttdc": -1})
+
+	findQuery := bson.M{"onLive": true}
+	orQuery := []bson.M{}
+	orQuery = append(orQuery, bson.M{"channel": bson.M{"$in": follower}})
+	//orQuery = append(orQuery, bson.M{"channel": bson.M{"$in": []string{"룩삼", "뽀로로"}}})
+	fmt.Println(orQuery)
+
+	findQuery["$or"] = orQuery
+
+	res, err := getCollection(client, colNameLive).Find(ctx, findQuery, findOptions)
+
 	U.CheckErr(err)
 
 	if err = res.All(ctx, &datas); err != nil {
@@ -221,7 +249,7 @@ func UpdateUserInfo(following, email string) string {
 	filter := bson.M{"email": email}
 	update := bson.D{
 		{"$push", bson.D{
-			{"followingtest", following},
+			{"following", following},
 		},
 		},
 	}
@@ -230,4 +258,24 @@ func UpdateUserInfo(following, email string) string {
 	U.CheckErr(err)
 
 	return "updateUserInfo"
+}
+
+// SearchDBbyEmail func
+func SearchDBbyEmail(email string) []string {
+	client, ctx, cancel := connectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	type foll struct {
+		Following []string `bson:"following,omitempty"`
+	}
+
+	var folle []foll
+
+	res, _ := getCollection(client, colNameUser).Find(ctx, bson.M{"email": email})
+	if err := res.All(ctx, &folle); err != nil {
+		fmt.Println(err)
+	}
+
+	return folle[0].Following
 }

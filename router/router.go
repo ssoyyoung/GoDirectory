@@ -27,8 +27,10 @@ func Router() *echo.Echo {
 	//Router List
 	e.GET("/", handler.TestPage)
 
-	//Main Page Request
+	//Main Page Request(order by views)
 	e.GET("/getList", handler.GetLiveStreamers)
+	//Main Page Request(order by follwer)
+	e.GET("/getList/:email", handler.GetLiveStreamersByFollower)
 
 	//Admin Page Request
 	e.GET("/getStreamers", handler.GetStreamers)

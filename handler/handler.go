@@ -21,6 +21,15 @@ func GetLiveStreamers(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
+// GetLiveStreamersByFollower func
+func GetLiveStreamersByFollower(c echo.Context) error {
+	email := c.Param("email")
+	follower := mongodb.SearchDBbyEmail(email)
+	res := mongodb.LiveTrueListByFollower(follower) //Get Follower data
+
+	return c.String(http.StatusOK, res)
+}
+
 // GetStreamers func
 func GetStreamers(c echo.Context) error {
 	res := mongodb.LiveAllList() //Get all data
@@ -62,9 +71,7 @@ func CreateStreamer(c echo.Context) error {
 // UpdateFollwer func
 func UpdateFollower(c echo.Context) error {
 	email := c.Param("email")
-	fmt.Println("email.....", email)
-	fmt.Println("following.....", c.FormValue("following"))
-	res := mongodb.UpdateUserInfo(c.FormValue("following"), email)
+	res := mongodb.UpdateUserInfo(c.FormValue("follower"), email)
 
 	return c.String(http.StatusOK, res)
 }

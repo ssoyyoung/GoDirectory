@@ -33,11 +33,12 @@ type LiveList struct {
 
 //UserInfo struct
 type UserInfo struct {
-	ID       primitive.ObjectID `bson:"_id,omitempty"`
-	GoogleID string             `bson:"googleId,omitempty"`
-	Name     string             `bson:"name,omitempty"`
-	Email    string             `bson:"email,omitempty"`
-	Token    string             `bson:"token,omitempty"`
+	ID        primitive.ObjectID `bson:"_id,omitempty"`
+	GoogleID  string             `bson:"googleId,omitempty"`
+	Name      string             `bson:"name,omitempty"`
+	Email     string             `bson:"email,omitempty"`
+	Token     string             `bson:"token,omitempty"`
+	Following []string           `bson:"following,omitempty"`
 }
 
 //Auth struct
