@@ -34,7 +34,7 @@ func Router() *echo.Echo {
 
 	//Admin Page Request
 	e.GET("/getStreamers", handler.GetStreamers)
-	e.GET("/getStreamer/:id", handler.GetStreamerByID, login.IsLoggedIn)
+	e.GET("/getStreamer/:id", handler.GetStreamerByID)
 	e.GET("/deleteStreamer/:id", handler.DeleteStreamer, login.IsLoggedIn)
 	e.POST("/updateStreamer/:id", handler.UpdateStreamer, login.IsLoggedIn)
 	e.POST("/createStreamer", handler.CreateStreamer, login.IsLoggedIn)
@@ -43,7 +43,8 @@ func Router() *echo.Echo {
 	e.POST("/updateFollower/:email", handler.UpdateFollower)
 
 	//Login Request
-	e.POST("/login", login.GoogleLogin)
+	e.POST("/userInfo", login.GoogleLogin)
+	// TODO : chang userInfo > login
 
 	return e
 }
