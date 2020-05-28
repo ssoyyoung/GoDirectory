@@ -34,8 +34,12 @@ func GoogleLogin(c echo.Context) error {
 		}
 		mongodb.UpdateUser(googleID, t)
 		//following := mongodb.SearchDBbyEmail(email)
-		return c.JSON(http.StatusOK, map[string]string{
-			"token": t,
+		return c.JSON(http.StatusOK, map[string]interface{}{
+			"token":     t,
+			"name":      name,
+			"email":     email,
+			"googleID":  googleID,
+			"following": mongodb.SearchDBbyEmail(email),
 		})
 	}
 	return echo.ErrUnauthorized
