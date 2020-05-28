@@ -27,7 +27,7 @@ func LiveTrueListByFollower(follower []string) string {
 	filter := bson.M{"onLive": true}
 
 	orQuery := []bson.M{}
-	orQuery = append(orQuery, bson.M{"channel": bson.M{"$in": follower}})
+	orQuery = append(orQuery, bson.M{"_uniq": bson.M{"$in": follower}})
 
 	filter["$or"] = orQuery
 
