@@ -33,6 +33,7 @@ func GoogleLogin(c echo.Context) error {
 			return err
 		}
 		mongodb.UpdateUser(googleID, t)
+		//following := mongodb.SearchDBbyEmail(email)
 		return c.JSON(http.StatusOK, map[string]string{
 			"token": t,
 		})

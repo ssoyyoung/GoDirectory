@@ -3,6 +3,7 @@ package middleware
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/labstack/echo"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
@@ -68,10 +69,27 @@ func CreateStreamer(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
-// UpdateFollwer func
-func UpdateFollower(c echo.Context) error {
+// PushFollowing func
+func PushFollowing(c echo.Context) error {
 	email := c.Param("email")
-	res := mongodb.UpdateUserInfo(c.FormValue("follower"), email)
+	res := mongodb.PushFollowing(c.FormValue("following"), email)
 
 	return c.String(http.StatusOK, res)
+}
+
+// PullFollowing func
+func PullFollowing(c echo.Context) error {
+	email := c.Param("email")
+	res := mongodb.PullFollowing(c.FormValue("following"), email)
+
+	return c.String(http.StatusOK, res)
+}
+
+// GetFollowing func
+func GetFollowing(c echo.Context) error {
+	email := c.Param("email")
+
+	result := strings.Join(mongodb.SearchDBbyEmail(email), ",")
+
+	return c.String(http.StatusOK, result)
 }

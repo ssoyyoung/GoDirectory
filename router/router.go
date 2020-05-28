@@ -39,12 +39,18 @@ func Router() *echo.Echo {
 	e.POST("/updateStreamer/:id", handler.UpdateStreamer, login.IsLoggedIn)
 	e.POST("/createStreamer", handler.CreateStreamer, login.IsLoggedIn)
 
-	// follow & like Request
-	e.POST("/updateFollower/:email", handler.UpdateFollower)
+	// following Request
+	e.POST("/pushFollowing/:email", handler.PushFollowing)
+	e.POST("/pullFollowing/:email", handler.PullFollowing)
+	e.GET("/getFollowing/:email", handler.GetFollowing)
 
-	//Login Request
-	e.POST("/userInfo", login.GoogleLogin)
-	// TODO : chang userInfo > login
+	//Login Request > return으로 following 정보 보내기
+	e.POST("/login", login.GoogleLogin)
+
+	// TODO
+	// userInfo > login
+	// updateFollower > pushFollowing, param 이름 follower > following
+	// pullFollowing 새로 생성함
 
 	return e
 }
