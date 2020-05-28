@@ -8,10 +8,9 @@ import (
 	auth "github.com/ssoyyoung.p/GoDirectory/auth"
 	_ "github.com/ssoyyoung.p/GoDirectory/docs"
 	handler "github.com/ssoyyoung.p/GoDirectory/handler"
-	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
-//Router function
+/* //Router function
 func Router() *echo.Echo {
 	e := echo.New()
 
@@ -53,13 +52,14 @@ func Router() *echo.Echo {
 
 	return e
 }
-
+*/
 // TODO
 // userInfo > login
 // updateFollower > pushFollowing, param 이름 follower > following
 // pullFollowing 새로 생성함
 
-/* //Router function
+//Router function
+
 func Router() *echo.Echo {
 	e := echo.New()
 	e.Debug = true
@@ -102,4 +102,4 @@ func Router() *echo.Echo {
 	}
 
 	return e
-} */
+}
