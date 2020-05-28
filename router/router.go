@@ -29,7 +29,6 @@ func Router() *echo.Echo {
 	}))
 
 	//Router List
-	e.GET("/", handler.TestPage)
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	//Main Page Request(order by views)
