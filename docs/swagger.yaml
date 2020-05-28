@@ -1,0 +1,16 @@
+info:
+  contact:
+    email: cracker.weare@gmail.com
+    name: soyoung Park
+    url: http://www.sparker.kr
+  description: Team Sparker
+  license: {}
+  title: MeerkatOnAir API Server
+  version: 0.0.1
+paths:
+  /getList:
+    get:
+      responses:
+        "200": {}
+      summary: get live data
+swagger: "2.0"

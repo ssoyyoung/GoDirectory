@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"net/http"
 	"strings"
 
@@ -9,13 +8,11 @@ import (
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 )
 
-//TestPage func
-func TestPage(c echo.Context) error {
-	fmt.Println("Connection Complete")
-	return nil
-}
-
-// GetSteamer func
+// GetLiveStreamers func
+// @Summary get all live true data
+// @name GetLiveStreamers
+// @Router /getList [get]
+// @Success 200
 func GetLiveStreamers(c echo.Context) error {
 	res := mongodb.LiveTrueList() //Get live data (desc)
 

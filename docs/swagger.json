@@ -1,0 +1,24 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Team Sparker",
+        "title": "MeerkatOnAir API Server",
+        "contact": {
+            "name": "soyoung Park",
+            "url": "http://www.sparker.kr",
+            "email": "cracker.weare@gmail.com"
+        },
+        "license": {},
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/getList": {
+            "get": {
+                "summary": "get live data",
+                "responses": {
+                    "200": {}
+                }
+            }
+        }
+    }
+}
