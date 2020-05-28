@@ -7,9 +7,9 @@ ENV key=value
 RUN go get -v -u go.mongodb.org/mongo-driver/mongo
 RUN go get github.com/labstack/echo
 RUN go get github.com/dgrijalva/jwt-go
-RUN go get github.com/swaggo/swag/cmd/swag
-RUN go get -u github.com/swaggo/echo-swagger
-RUN go get -u github.com/alecthomas/template
-RUN swag init
+#RUN go get github.com/swaggo/swag/cmd/swag
+#RUN go get -u github.com/swaggo/echo-swagger
+#RUN go get -u github.com/alecthomas/template
+#RUN swag init
 
 CMD go run main.go
