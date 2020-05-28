@@ -6,7 +6,8 @@ import (
 	echo "github.com/labstack/echo"
 	middleware "github.com/labstack/echo/middleware"
 	auth "github.com/ssoyyoung.p/GoDirectory/auth"
-	_ "github.com/ssoyyoung.p/GoDirectory/docs"
+
+	//_ "github.com/ssoyyoung.p/GoDirectory/docs"
 	handler "github.com/ssoyyoung.p/GoDirectory/handler"
 )
 
@@ -53,13 +54,13 @@ func Router() *echo.Echo {
 	return e
 }
 */
+
 // TODO
 // userInfo > login
 // updateFollower > pushFollowing, param 이름 follower > following
 // pullFollowing 새로 생성함
 
-//Router function
-
+// Router function
 func Router() *echo.Echo {
 	e := echo.New()
 	e.Debug = true
@@ -73,8 +74,6 @@ func Router() *echo.Echo {
 	}))
 
 	// Router List
-	e.GET("/", handler.TestPage)
-
 	getList := e.Group("getList")
 	{
 		getList.GET("/live", handler.GetLiveStreamers)
