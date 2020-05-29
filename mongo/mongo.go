@@ -101,7 +101,7 @@ func CheckUser(googleID, name, email string) bool {
 	}
 
 	if num == 0 {
-		crud.CreateUser(colNameCrawl, newData)
+		crud.CreateUser(colNameUser, newData)
 	}
 	return true
 }
