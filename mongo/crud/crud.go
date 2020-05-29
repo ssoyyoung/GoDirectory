@@ -69,7 +69,7 @@ func AllData(collection string, filter bson.M, sort bson.M) string {
 	defer cancel()
 
 	findOptions := options.Find()
-	options.Find().SetSort(sort)
+	findOptions.SetSort(sort)
 
 	res, err := GetCollection(client, collection).Find(ctx, filter, findOptions)
 	U.CheckErr(err)
