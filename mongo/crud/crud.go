@@ -99,6 +99,24 @@ func GetFollowing(collection string, filter bson.M) []string {
 	return result[0].Following
 }
 
+// GetBlocking func
+func GetBlocking(collection string, filter bson.M) []string {
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	var result []m.UserInfo
+
+	res, err := GetCollection(client, collection).Find(ctx, filter)
+	U.CheckErr(err)
+
+	if err = res.All(ctx, &result); err != nil {
+		fmt.Println(err)
+	}
+
+	return result[0].Block
+}
+
 // Delete func
 func Delete(collection string, filter bson.M) string {
 	client, ctx, cancel := ConnectDB()

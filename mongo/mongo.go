@@ -145,10 +145,44 @@ func PullFollowing(following, email string) string {
 	return crud.Update(colNameUser, filter, update)
 }
 
-// SearchDBbyEmail func
-func SearchDBbyEmail(email string) []string {
+// GetFollowing func
+func GetFollowing(email string) []string {
 
 	filter := bson.M{"email": email}
 
 	return crud.GetFollowing(colNameUser, filter)
+}
+
+// PushBlocking func
+func PushBlocking(following, email string) string {
+
+	filter := bson.M{"email": email}
+	update := bson.M{
+		"$push": bson.M{
+			"block": following,
+		},
+	}
+
+	return crud.Update(colNameUser, filter, update)
+}
+
+// PullBlocking func
+func PullBlocking(following, email string) string {
+
+	filter := bson.M{"email": email}
+	update := bson.M{
+		"$pull": bson.M{
+			"block": following,
+		},
+	}
+
+	return crud.Update(colNameUser, filter, update)
+}
+
+// GetBlocking func
+func GetBlocking(email string) []string {
+
+	filter := bson.M{"email": email}
+
+	return crud.GetBlocking(colNameUser, filter)
 }

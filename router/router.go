@@ -47,12 +47,12 @@ func Router() *echo.Echo {
 		following.GET("/getUserInfo/:email", handler.GetFollowing)
 	}
 
-	/* unfollowing := e.Group("/unfollowing")
+	unfollowing := e.Group("/block")
 	{
-		unfollowing.POST("/updateUserInfo/:email", handler.PushUnFollowing)
-		unfollowing.POST("/deleteUserInfo/:email", handler.PullUnFollowing)
-		unfollowing.GET("/getUserInfo/:email", handler.GetUnFollowing)
-	} */
+		unfollowing.POST("/updateUserInfo/:email", handler.PushBlocking)
+		unfollowing.POST("/deleteUserInfo/:email", handler.PullBlocking)
+		unfollowing.GET("/getUserInfo/:email", handler.GetBlocking)
+	}
 
 	login := e.Group("/login")
 	{

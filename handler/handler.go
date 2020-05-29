@@ -22,7 +22,7 @@ func GetLiveStreamers(c echo.Context) error {
 // GetLiveStreamersByFollower func
 func GetLiveStreamersByFollower(c echo.Context) error {
 	email := c.Param("email")
-	follower := mongodb.SearchDBbyEmail(email)
+	follower := mongodb.GetFollowing(email)
 	res := mongodb.LiveTrueListByFollower(follower) //Get Follower data
 
 	return c.String(http.StatusOK, res)
@@ -86,7 +86,32 @@ func PullFollowing(c echo.Context) error {
 func GetFollowing(c echo.Context) error {
 	email := c.Param("email")
 
-	result := strings.Join(mongodb.SearchDBbyEmail(email), ",")
+	result := strings.Join(mongodb.GetFollowing(email), ",")
+
+	return c.String(http.StatusOK, result)
+}
+
+// PushBlocking func
+func PushBlocking(c echo.Context) error {
+	email := c.Param("email")
+	res := mongodb.PushBlocking(c.FormValue("block"), email)
+
+	return c.String(http.StatusOK, res)
+}
+
+// PullBlocking func
+func PullBlocking(c echo.Context) error {
+	email := c.Param("email")
+	res := mongodb.PullBlocking(c.FormValue("block"), email)
+
+	return c.String(http.StatusOK, res)
+}
+
+// GetBlocking func
+func GetBlocking(c echo.Context) error {
+	email := c.Param("email")
+
+	result := strings.Join(mongodb.GetBlocking(email), ",")
 
 	return c.String(http.StatusOK, result)
 }

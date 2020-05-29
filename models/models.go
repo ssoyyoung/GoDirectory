@@ -39,6 +39,7 @@ type UserInfo struct {
 	Email     string             `bson:"email,omitempty"`
 	Token     string             `bson:"token,omitempty"`
 	Following []string           `bson:"following,omitempty"`
+	Block     []string           `bson:"block,omitempty"`
 }
 
 //Auth struct
