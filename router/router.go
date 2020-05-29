@@ -82,7 +82,7 @@ func Router() *echo.Echo {
 
 	admin := e.Group("/admin")
 	{
-		admin.GET("/getStremers", handler.GetStreamers)
+		admin.GET("/getStreamers", handler.GetStreamers)
 		admin.GET("/getStreamer/:id", handler.GetStreamerByID)
 		admin.GET("/deleteStreamer/:id", handler.DeleteStreamer, auth.IsLoggedIn)
 		admin.POST("/updateStreamer/:id", handler.UpdateStreamer, auth.IsLoggedIn)
