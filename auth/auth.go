@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -25,7 +26,17 @@ func GoogleLogin(c echo.Context) error {
 		claims := token.Claims.(jwt.MapClaims)
 		claims["name"] = name
 		claims["googleId"] = googleID
-		claims["admin"] = true
+		claims["admin"] = false
+		switch email {
+		case
+			"jwhyun2215@gmail.com",
+			"truenorthj@gmail.com",
+			"inajung.korea@gmail.com",
+			"ssoyyoung.p@gmail.com",
+			"cracker.weare@gmail.com":
+			claims["admin"] = true
+		}
+
 		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
 		t, err := token.SignedString([]byte("secret"))
@@ -33,14 +44,26 @@ func GoogleLogin(c echo.Context) error {
 			return err
 		}
 		mongodb.UpdateUser(googleID, t)
-		//following := mongodb.SearchDBbyEmail(email)
 		return c.JSON(http.StatusOK, map[string]interface{}{
 			"token":    t,
 			"name":     name,
 			"email":    email,
 			"googleID": googleID,
-			//"following": mongodb.SearchDBbyEmail(email),
 		})
 	}
 	return echo.ErrUnauthorized
+}
+
+// IsAdmin func
+func IsAdmin(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		user := c.Get("user").(*jwt.Token)
+		claims := user.Claims.(jwt.MapClaims)
+		isAdmin := claims["admin"].(bool)
+		fmt.Println(isAdmin)
+		if isAdmin == false {
+			return echo.ErrUnauthorized
+		}
+		return next(c)
+	}
 }

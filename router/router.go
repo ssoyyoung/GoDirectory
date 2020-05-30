@@ -33,11 +33,11 @@ func Router() *echo.Echo {
 
 	admin := e.Group("/admin")
 	{
-		admin.GET("/getStreamers", handler.GetStreamers)
+		admin.GET("/getStreamers", handler.GetStreamers, auth.IsLoggedIn)
 		admin.GET("/getStreamer/:id", handler.GetStreamerByID)
-		admin.GET("/deleteStreamer/:id", handler.DeleteStreamer, auth.IsLoggedIn)
-		admin.POST("/updateStreamer/:id", handler.UpdateStreamer, auth.IsLoggedIn)
-		admin.POST("/createStreamer", handler.CreateStreamer, auth.IsLoggedIn)
+		admin.GET("/deleteStreamer/:id", handler.DeleteStreamer, auth.IsLoggedIn, auth.IsAdmin)
+		admin.POST("/updateStreamer/:id", handler.UpdateStreamer, auth.IsLoggedIn, auth.IsAdmin)
+		admin.POST("/createStreamer", handler.CreateStreamer, auth.IsLoggedIn, auth.IsAdmin)
 	}
 
 	following := e.Group("/following")
