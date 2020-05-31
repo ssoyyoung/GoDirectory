@@ -1,20 +1,48 @@
 package auth
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
+	"github.com/ssoyyoung.p/GoDirectory/utils"
 )
 
 // IsLoggedIn FUNC
 var IsLoggedIn = middleware.JWTWithConfig(middleware.JWTConfig{
 	SigningKey: []byte("secret"),
 })
+
+type admin struct {
+	AdminUser []string //대문자로 써야 인식이 된다.
+}
+
+func getAdminUser() admin {
+	data, err := os.Open("auth/auth.json")
+	utils.CheckErr(err)
+
+	var ad admin
+	byteValue, _ := ioutil.ReadAll(data)
+	json.Unmarshal(byteValue, &ad)
+
+	return ad
+}
+
+func contains(v string, a []string) bool {
+	for _, i := range a {
+		if i == v {
+			return true
+		}
+	}
+	return false
+}
 
 // GoogleLogin func
 func GoogleLogin(c echo.Context) error {
@@ -27,13 +55,10 @@ func GoogleLogin(c echo.Context) error {
 		claims["name"] = name
 		claims["googleId"] = googleID
 		claims["admin"] = false
-		switch email {
-		case
-			"jwhyun2215@gmail.com",
-			"truenorthj@gmail.com",
-			"inajung.korea@gmail.com",
-			"ssoyyoung.p@gmail.com",
-			"cracker.weare@gmail.com":
+
+		admin := getAdminUser()
+		switch {
+		case contains(email, admin.AdminUser):
 			claims["admin"] = true
 		}
 
