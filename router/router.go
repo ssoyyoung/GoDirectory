@@ -28,6 +28,7 @@ func Router() *echo.Echo {
 	getList := e.Group("getList")
 	{
 		getList.GET("/live", handler.GetLiveStreamers)
+		getList.GET("/live/:category", handler.GetLiveStreamersByCate)
 		getList.GET("/following/:email", handler.GetLiveStreamersByFollower)
 	}
 

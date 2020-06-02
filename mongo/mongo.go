@@ -45,6 +45,14 @@ func LiveAllList() string {
 	return crud.AllData(colNameCrawl, filter, sort)
 }
 
+// GetCategoryList func
+func GetCategoryList(cate string) string {
+	filter := bson.M{"onLive": true, "category": cate}
+	sort := bson.M{}
+
+	return crud.AllData(colNameLive, filter, sort)
+}
+
 // SearchDBbyID func
 func SearchDBbyID(id string) string {
 

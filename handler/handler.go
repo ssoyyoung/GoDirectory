@@ -35,6 +35,14 @@ func GetStreamers(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
+// GetLiveStreamersByCate func
+func GetLiveStreamersByCate(c echo.Context) error {
+	cate := c.Param("category")
+	res := mongodb.GetCategoryList(cate)
+
+	return c.String(http.StatusOK, res)
+}
+
 // GetStreamerByID func
 func GetStreamerByID(c echo.Context) error {
 	id := c.Param("id")
