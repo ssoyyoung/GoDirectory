@@ -17,12 +17,18 @@ func Router() *echo.Echo {
 	e.Debug = true
 
 	// echo middleware func
+	//e.Pre(middleware.HTTPSRedirect())
 	e.Use(middleware.Logger())                             //Setting logger
 	e.Use(middleware.Recover())                            //Recover from panics anywhere in the chain
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{ //CORS Middleware
 		AllowOrigins: []string{"*"},
 		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
 	}))
+
+	// Health check!
+	e.GET("/healthy", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Healthy!")
+	})
 
 	// Router List
 	getList := e.Group("getList")
