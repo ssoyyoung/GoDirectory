@@ -16,8 +16,7 @@ func main() {
 	echoR := router.Router()
 
 	//Start echo server..
-	//echoR.Logger.Fatal(echoR.StartTLS(":1323","cert.pem","privkey.pem"))
-	//echoR.Logger.Fatal(echoR.Server.ListenAndServeTLS("server.crt", "server.key"))
-	echoR.Logger.Fatal(echoR.StartTLS(":1323", "server.crt", "server.key"))
+
+	echoR.Logger.Fatal(echoR.StartTLS(":1323", "cert.pem", "privkey.pem"))
 	//echoR.Logger.Fatal(echoR.Start(":1323"))
 }
