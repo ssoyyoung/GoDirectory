@@ -195,3 +195,18 @@ func GetBlocking(email string) []string {
 
 	return crud.GetBlocking(colNameUser, filter)
 }
+
+// SearchBar func
+func SearchBar(query string) string {
+	filter := bson.M{}
+	orQuery := []bson.M{}
+	orQuery = append(orQuery, bson.M{"category": bson.M{"$regex": query}})
+	orQuery = append(orQuery, bson.M{"creatorDataName": bson.M{"$regex": query}})
+	orQuery = append(orQuery, bson.M{"liveDataTitle": bson.M{"$regex": query}})
+
+	filter["$or"] = orQuery
+
+	sort := bson.M{"liveAttdc": -1}
+
+	return crud.AllData(colNameLive, filter, sort)
+}

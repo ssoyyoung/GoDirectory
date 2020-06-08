@@ -123,3 +123,11 @@ func GetBlocking(c echo.Context) error {
 
 	return c.String(http.StatusOK, result)
 }
+
+// SearchBar func
+func SearchBar(c echo.Context) error {
+	query := c.Param("query")
+	res := mongodb.SearchBar(query)
+
+	return c.String(http.StatusOK, res)
+}
