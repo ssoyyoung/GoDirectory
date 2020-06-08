@@ -86,15 +86,16 @@ func UpdateDBbyID(id, platform, channel, channelID string) string {
 }
 
 // CreateDB func
-func CreateDB(platform, channel, channelID string) string {
+func CreateDB(platform, channel, channelID, category string) string {
 
-	newData := m.CrawlTarget{
+	newData := m.LiveList{
 		Platform:  platform,
 		Channel:   channel,
 		ChannelID: channelID,
+		Category:  category,
 	}
 
-	return crud.CreateCrawl(colNameCrawl, newData)
+	return crud.CreateCrawl(colNameLive, newData)
 }
 
 //CheckUser func

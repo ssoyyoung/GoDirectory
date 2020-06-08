@@ -69,7 +69,7 @@ func UpdateStreamer(c echo.Context) error {
 
 // CreateStreamer func
 func CreateStreamer(c echo.Context) error {
-	res := mongodb.CreateDB(c.FormValue("platform"), c.FormValue("channel"), c.FormValue("channelID"))
+	res := mongodb.CreateDB(c.FormValue("platform"), c.FormValue("channel"), c.FormValue("channelID"), c.FormValue("category"))
 
 	return c.String(http.StatusOK, res)
 }

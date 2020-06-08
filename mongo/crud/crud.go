@@ -142,7 +142,7 @@ func Update(collection string, filter bson.M, update bson.M) string {
 }
 
 // CreateCrawl func
-func CreateCrawl(collection string, newData m.CrawlTarget) string {
+func CreateCrawl(collection string, newData m.LiveList) string {
 	client, ctx, cancel := ConnectDB()
 	defer client.Disconnect(ctx)
 	defer cancel()
