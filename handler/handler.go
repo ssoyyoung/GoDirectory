@@ -30,7 +30,7 @@ func GetLiveStreamersByFollower(c echo.Context) error {
 
 // GetStreamers func
 func GetStreamers(c echo.Context) error {
-	res := mongodb.LiveAllList() //Get all data
+	res := mongodb.LiveAllList() //Get all data  > crawl to live
 
 	return c.String(http.StatusOK, res)
 }
@@ -46,7 +46,7 @@ func GetLiveStreamersByCate(c echo.Context) error {
 // GetStreamerByID func
 func GetStreamerByID(c echo.Context) error {
 	id := c.Param("id")
-	res := mongodb.SearchDBbyID(id)
+	res := mongodb.SearchDBbyID(id) //  > crawl to live
 
 	return c.String(http.StatusOK, res)
 }
@@ -54,14 +54,14 @@ func GetStreamerByID(c echo.Context) error {
 // DeleteStreamer func
 func DeleteStreamer(c echo.Context) error {
 	id := c.Param("id")
-	res := mongodb.DeleteDBbyID(id)
+	res := mongodb.DeleteDBbyID(id) //  > crawl to live
 
 	return c.String(http.StatusOK, res)
 }
 
 // UpdateStreamer func
 func UpdateStreamer(c echo.Context) error {
-	id := c.Param("id")
+	id := c.Param("id") //  > crawl to live
 	res := mongodb.UpdateDBbyID(id, c.FormValue("platform"), c.FormValue("channel"), c.FormValue("channelID"))
 
 	return c.String(http.StatusOK, res)

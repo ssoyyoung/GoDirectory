@@ -81,6 +81,32 @@ func AllData(collection string, filter bson.M, sort bson.M) string {
 	return U.JSONMarshalString(datas)
 }
 
+// AllDataForAdmin func
+func AllDataForAdmin(collection string, filter bson.M, sort bson.M) string {
+
+	var admin []m.LiveListForAdmin
+
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	findOptions := options.Find()
+	findOptions.SetSort(sort)
+
+	res, err := GetCollection(client, collection).Find(ctx, filter, findOptions)
+	fmt.Println(res)
+	U.CheckErr(err)
+
+	if err = res.All(ctx, &admin); err != nil {
+		fmt.Println(err)
+	}
+
+	jsonBytes, err := json.Marshal(admin)
+	jsonString := string(jsonBytes)
+
+	return jsonString
+}
+
 // GetFollowing func
 func GetFollowing(collection string, filter bson.M) []string {
 	client, ctx, cancel := ConnectDB()

@@ -9,7 +9,6 @@ import (
 
 // Collection name
 const colNameLive = "live_list"
-const colNameCrawl = "crawl_target"
 const colNameUser = "user_info"
 
 // LiveTrueList func
@@ -42,7 +41,7 @@ func LiveAllList() string {
 	filter := bson.M{}
 	sort := bson.M{}
 
-	return crud.AllData(colNameCrawl, filter, sort)
+	return crud.AllDataForAdmin(colNameLive, filter, sort) // change!
 }
 
 // GetCategoryList func
@@ -59,7 +58,7 @@ func SearchDBbyID(id string) string {
 	filter := bson.M{"_id": U.ConvertID(id)}
 	sort := bson.M{}
 
-	return crud.AllData(colNameCrawl, filter, sort)
+	return crud.AllDataForAdmin(colNameLive, filter, sort) // change!
 }
 
 // DeleteDBbyID func
@@ -67,7 +66,7 @@ func DeleteDBbyID(id string) string {
 
 	filter := bson.M{"_id": U.ConvertID(id)}
 
-	return crud.Delete(colNameCrawl, filter)
+	return crud.Delete(colNameLive, filter) // change!
 }
 
 //UpdateDBbyID func
@@ -82,7 +81,7 @@ func UpdateDBbyID(id, platform, channel, channelID string) string {
 		},
 	}
 
-	return crud.Update(colNameCrawl, filter, update)
+	return crud.Update(colNameLive, filter, update) // change!
 }
 
 // CreateDB func
