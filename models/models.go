@@ -33,10 +33,11 @@ type LiveList struct {
 
 // LiveListForAdmin struct
 type LiveListForAdmin struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty"`
-	Channel   string             `bson:"channel,omitempty"`
-	ChannelID string             `bson:"channelID,omitempty"`
-	Category  string             `bson:"category,omitempty"`
+	_id       primitive.ObjectID `bson:"_id,omitempty"`
+	channel   string             `bson:"channel,omitempty"`
+	channelID string             `bson:"channelID,omitempty"`
+	category  string             `bson:"category,omitempty"`
+	platform  string             `bson:"platform,omitempty"`
 }
 
 //UserInfo struct
