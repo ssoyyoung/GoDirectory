@@ -67,7 +67,7 @@ func Router() *echo.Echo {
 		login.POST("", auth.GoogleLogin)
 	}
 
-	search := e.Group("/searchBar")
+	search := e.Group("/search")
 	{
 		search.GET("/:query", handler.SearchBar)
 	}
