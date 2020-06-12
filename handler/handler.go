@@ -28,6 +28,15 @@ func GetLiveStreamersByFollower(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
+// GetLiveStreamersByBlocking func
+func GetLiveStreamersByBlocking(c echo.Context) error {
+	email := c.Param("email")
+	blocking := mongodb.GetBlocking(email)
+	res := mongodb.LiveAllListByBlocking(blocking)
+
+	return c.String(http.StatusOK, res)
+}
+
 // GetStreamers func
 func GetStreamers(c echo.Context) error {
 	res := mongodb.LiveAllList() //Get all data  > crawl to live

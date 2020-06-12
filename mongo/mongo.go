@@ -35,6 +35,20 @@ func LiveTrueListByFollower(follower []string) string {
 	return crud.AllData(colNameLive, filter, sort)
 }
 
+// LiveAllListByBlocking func
+func LiveAllListByBlocking(blocking []string) string {
+	filter := bson.M{}
+
+	orQuery := []bson.M{}
+	orQuery = append(orQuery, bson.M{"_uniq": bson.M{"$in": blocking}})
+
+	filter["$or"] = orQuery
+
+	sort := bson.M{}
+
+	return crud.AllData(colNameLive, filter, sort)
+}
+
 // LiveAllList func
 func LiveAllList() string {
 
