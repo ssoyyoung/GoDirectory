@@ -94,7 +94,6 @@ func AllDataForAdmin(collection string, filter bson.M, sort bson.M) string {
 	findOptions.SetSort(sort)
 
 	res, err := GetCollection(client, collection).Find(ctx, filter, findOptions)
-	fmt.Println(res)
 	U.CheckErr(err)
 
 	if err = res.All(ctx, &admin); err != nil {
@@ -102,9 +101,7 @@ func AllDataForAdmin(collection string, filter bson.M, sort bson.M) string {
 	}
 
 	jsonBytes, err := json.Marshal(admin)
-	fmt.Println(jsonBytes)
 	jsonString := string(jsonBytes)
-	fmt.Println(jsonString)
 
 	return jsonString
 }
