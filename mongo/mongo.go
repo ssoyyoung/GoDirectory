@@ -103,6 +103,7 @@ func CreateDB(platform, channel, channelID, category string) string {
 
 	newData := m.LiveList{
 		Platform:  platform,
+		Uniq:      platform + channelID,
 		Channel:   channel,
 		ChannelID: channelID,
 		Category:  category,
