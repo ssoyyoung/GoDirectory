@@ -101,15 +101,22 @@ func UpdateDBbyID(id, platform, channel, channelID string) string {
 // CreateDB func
 func CreateDB(platform, channel, channelID, category string) string {
 
-	newData := m.LiveList{
-		Platform:  platform,
-		Uniq:      platform + channelID,
-		Channel:   channel,
-		ChannelID: channelID,
-		Category:  category,
+	filter := bson.M{"_uniq": platform + channelID}
+	num := crud.Count(colNameLive, filter)
+
+	if num == 0 {
+		newData := m.LiveList{
+			Platform:  platform,
+			Uniq:      platform + channelID,
+			Channel:   channel,
+			ChannelID: channelID,
+			Category:  category,
+		}
+
+		return crud.CreateCrawl(colNameLive, newData)
 	}
 
-	return crud.CreateCrawl(colNameLive, newData)
+	return "exist!"
 }
 
 //CheckUser func
