@@ -198,6 +198,8 @@ func Count(collection string, filter bson.M) int64 {
 
 	res, err := GetCollection(client, collection).CountDocuments(ctx, filter)
 
+	fmt.Println(res)
+
 	U.CheckErr(err)
 
 	return res

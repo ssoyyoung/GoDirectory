@@ -119,6 +119,18 @@ func CreateDB(platform, channel, channelID, category string) string {
 	return "exist!"
 }
 
+// CheckDB func
+func CheckDB(platform, channelID string) string {
+	filter := bson.M{"_uniq": platform + channelID}
+	num := crud.Count(colNameLive, filter)
+
+	if num == 0 {
+		return "true"
+	}
+
+	return "false"
+}
+
 //CheckUser func
 func CheckUser(googleID, name, email string) bool {
 

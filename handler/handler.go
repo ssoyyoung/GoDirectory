@@ -84,6 +84,14 @@ func CreateStreamer(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
+// ExistStreamer func
+func ExistStreamer(c echo.Context) error {
+
+	res := mongodb.CheckDB(c.FormValue("platform"), c.FormValue("channelID"))
+
+	return c.String(http.StatusOK, res)
+}
+
 // PushFollowing func
 func PushFollowing(c echo.Context) error {
 	email := c.Param("email")
