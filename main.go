@@ -2,6 +2,7 @@ package main
 
 import (
 	router "github.com/ssoyyoung.p/GoDirectory/router"
+	"fmt"
 )
 
 // @title MeerkatOnAir API Server
@@ -13,10 +14,15 @@ import (
 // @contact.email cracker.weare@gmail.com
 
 func main() {
+	debug := true
+
 	echoR := router.Router()
 
-	//Start echo server..
+	fmt.Println("Start echo server..")
 
+	if debug {
+		echoR.Logger.Fatal(echoR.Start(":1324"))
+	} else {
 	echoR.Logger.Fatal(echoR.StartTLS(":1323", "cert.pem", "privkey.pem"))
-	//echoR.Logger.Fatal(echoR.Start(":1323"))
+	}
 }

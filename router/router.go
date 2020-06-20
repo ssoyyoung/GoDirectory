@@ -47,7 +47,7 @@ func Router() *echo.Echo {
 		admin.GET("/deleteStreamer/:id", handler.DeleteStreamer, auth.IsLoggedIn, auth.IsAdmin)
 		admin.POST("/updateStreamer/:id", handler.UpdateStreamer, auth.IsLoggedIn, auth.IsAdmin)
 		admin.POST("/createStreamer", handler.CreateStreamer, auth.IsLoggedIn, auth.IsAdmin)
-		admin.GET("/existStreamer", handler.ExistStreamer, auth.IsLoggedIn, auth.IsAdmin)
+		admin.POST("/existStreamer", handler.ExistStreamer, auth.IsLoggedIn, auth.IsAdmin)
 	}
 
 	following := e.Group("/following")
