@@ -61,7 +61,7 @@ func LiveAllList() string {
 // GetCategoryList func
 func GetCategoryList(cate string) string {
 	filter := bson.M{"onLive": true, "category": cate}
-	sort := bson.M{}
+	sort := bson.M{"liveAttdc": -1}
 
 	return crud.AllData(colNameLive, filter, sort)
 }
