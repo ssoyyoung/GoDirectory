@@ -2,3 +2,4 @@ mongo/mongodb_auth.json
 mongo/backup
 idocs/*
 *.pem
+auth/auth.json
