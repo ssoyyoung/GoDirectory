@@ -23,6 +23,10 @@ func GetLiveStreamers(c echo.Context) error {
 func GetLiveStreamersByFollower(c echo.Context) error {
 	email := c.Param("email")
 	follower := mongodb.GetFollowing(email)
+	// follower가 없는경우
+	if follower == nil {
+		return c.String(http.StatusOK, "")
+	}
 	res := mongodb.LiveTrueListByFollower(follower) //Get Follower data
 
 	return c.String(http.StatusOK, res)

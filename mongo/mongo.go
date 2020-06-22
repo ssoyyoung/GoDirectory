@@ -20,7 +20,7 @@ func LiveTrueList() string {
 	return crud.AllData(colNameLive, filter, sort)
 }
 
-// LiveTrueListByFollower  func
+// LiveTrueListByFollower func
 func LiveTrueListByFollower(follower []string) string {
 
 	filter := bson.M{"onLive": true}

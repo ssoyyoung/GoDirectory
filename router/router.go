@@ -19,6 +19,7 @@ func Router() *echo.Echo {
 	e.Debug = true
 
 	// echo middleware func
+	// e.Logger.SetLevel(log.INFO)
 	e.Use(middleware.Logger())                             //Setting logger
 	e.Use(middleware.Recover())                            //Recover from panics anywhere in the chain
 	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{ //CORS Middleware

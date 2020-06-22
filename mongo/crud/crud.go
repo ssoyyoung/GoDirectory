@@ -120,7 +120,9 @@ func GetFollowing(collection string, filter bson.M) []string {
 	if err = res.All(ctx, &result); err != nil {
 		fmt.Println(err)
 	}
-
+	if len(result) == 0 {
+		return nil
+	}
 	return result[0].Following
 }
 
@@ -197,9 +199,6 @@ func Count(collection string, filter bson.M) int64 {
 	defer cancel()
 
 	res, err := GetCollection(client, collection).CountDocuments(ctx, filter)
-
-	fmt.Println(res)
-
 	U.CheckErr(err)
 
 	return res
