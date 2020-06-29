@@ -36,6 +36,10 @@ func GetLiveStreamersByFollower(c echo.Context) error {
 func GetLiveStreamersByBlocking(c echo.Context) error {
 	email := c.Param("email")
 	blocking := mongodb.GetBlocking(email)
+	// blocking가 없는경우
+	if blocking == nil {
+		return c.String(http.StatusOK, "")
+	}
 	res := mongodb.LiveAllListByBlocking(blocking)
 
 	return c.String(http.StatusOK, res)
