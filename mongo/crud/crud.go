@@ -59,11 +59,11 @@ func ConnectDB() (client *mongo.Client, ctx context.Context, cancel context.Canc
 	return client, ctx, cancel
 }
 
-// define bson.M type data
-var datas []bson.M
-
 // AllData func
 func AllData(collection string, filter bson.M, sort bson.M) string {
+	// define bson.M type data
+	var datas []bson.M
+
 	client, ctx, cancel := ConnectDB()
 	defer client.Disconnect(ctx)
 	defer cancel()
