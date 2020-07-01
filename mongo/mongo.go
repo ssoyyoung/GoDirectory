@@ -21,7 +21,7 @@ func LiveTrueList() string {
 }
 
 // LiveTrueListByFollower func
-func LiveTrueListByFollower(follower []string) string {
+func LiveTrueListByFollower(follower []string) map[string]m.LiveList {
 
 	filter := bson.M{"onLive": true}
 
@@ -32,7 +32,7 @@ func LiveTrueListByFollower(follower []string) string {
 
 	sort := bson.M{"liveAttdc": -1}
 
-	return crud.AllData(colNameLive, filter, sort)
+	return crud.AllDataReturnJson(colNameLive, filter, sort)
 }
 
 // LiveAllListByBlocking func

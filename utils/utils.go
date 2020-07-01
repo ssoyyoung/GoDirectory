@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	m "github.com/ssoyyoung.p/GoDirectory/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -30,4 +31,14 @@ func CheckErr(err error) {
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+// ConvertData function
+func ConvertData(datas []m.LiveList) map[string]m.LiveList {
+	returnVal := map[string]m.LiveList{}
+	for idx, val := range datas {
+		returnVal[datas[idx].ID.Hex()] = val
+	}
+
+	return returnVal
 }

@@ -81,6 +81,28 @@ func AllData(collection string, filter bson.M, sort bson.M) string {
 	return U.JSONMarshalString(datas)
 }
 
+// AllDataReturnJson func
+func AllDataReturnJson(collection string, filter bson.M, sort bson.M) map[string]m.LiveList {
+	// define bson.M type data
+	var datas []m.LiveList
+
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	findOptions := options.Find()
+	findOptions.SetSort(sort)
+
+	res, err := GetCollection(client, collection).Find(ctx, filter, findOptions)
+	U.CheckErr(err)
+
+	if err = res.All(ctx, &datas); err != nil {
+		fmt.Println(err)
+	}
+
+	return U.ConvertData(datas)
+}
+
 // AllDataForAdmin func
 func AllDataForAdmin(collection string, filter bson.M, sort bson.M) string {
 
