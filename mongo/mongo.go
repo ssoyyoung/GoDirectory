@@ -21,7 +21,7 @@ func LiveTrueList() string {
 }
 
 // LiveTrueListByFollower func
-func LiveTrueListByFollower(follower []string) map[string]m.LiveList {
+func LiveTrueListByFollower(follower []string) string {
 
 	filter := bson.M{"onLive": true}
 

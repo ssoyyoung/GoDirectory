@@ -82,7 +82,7 @@ func AllData(collection string, filter bson.M, sort bson.M) string {
 }
 
 // AllDataReturnJson func
-func AllDataReturnJson(collection string, filter bson.M, sort bson.M) map[string]m.LiveList {
+func AllDataReturnJson(collection string, filter bson.M, sort bson.M) string {
 	// define bson.M type data
 	var datas []m.LiveList
 
@@ -100,7 +100,12 @@ func AllDataReturnJson(collection string, filter bson.M, sort bson.M) map[string
 		fmt.Println(err)
 	}
 
-	return U.ConvertData(datas)
+	jsonBytes, err := json.Marshal(datas)
+	jsonString := string(jsonBytes)
+
+	return jsonString
+
+	//return U.ConvertData(datas)
 }
 
 // AllDataForAdmin func

@@ -29,8 +29,8 @@ func GetLiveStreamersByFollower(c echo.Context) error {
 	}
 	res := mongodb.LiveTrueListByFollower(follower) //Get Follower data
 
-	//return c.String(http.StatusOK, res)
-	return c.JSON(http.StatusOK, res)
+	return c.String(http.StatusOK, res)
+	//return c.JSON(http.StatusOK, res)
 }
 
 // GetLiveStreamersByBlocking func

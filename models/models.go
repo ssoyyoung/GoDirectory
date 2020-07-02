@@ -14,21 +14,21 @@ type CrawlTarget struct {
 
 // LiveList struct
 type LiveList struct {
-	ID              primitive.ObjectID `bson:"_id,omitempty"`
-	Uniq            string             `bson:"_uniq,omitempty"`
-	Channel         string             `bson:"channel,omitempty"`
-	ChannelID       string             `bson:"channelID,omitempty"`
-	Platform        string             `bson:"platform,omitempty"`
-	OnLive          bool               `bson:"onLive,omitempty"`
-	UpdateDate      string             `bson:"updateDate,omitempty"`
-	CreatorDataHref string             `bson:"creatorDataHref,omitempty"`
-	creatorDataName string             `bson:"creatorDataName,omitempty"`
-	ImgDataSrc      string             `bson:"imgDataSrc,omitempty"`
-	LiveAttdc       int32              `bson:"liveAttdc,omitempty"`
-	LiveDataHref    string             `bson:"liveDataHref,omitempty"`
-	LiveDataTitle   string             `bson:"liveDataTitle,omitempty"`
-	Category        string             `bson:"category,omitempty"`
-	Detail          string             `bson:"detail,omitempty"`
+	ID              primitive.ObjectID `json:"_id" bson:"_id,omitempty"`
+	Uniq            string             `json:"_uniq" bson:"_uniq,omitempty"`
+	Channel         string             `json:"channel" bson:"channel,omitempty"`
+	ChannelID       string             `json:"channelID" bson:"channelID,omitempty"`
+	Platform        string             `json:"platform" bson:"platform,omitempty"`
+	OnLive          bool               `json:"onLive" bson:"onLive,omitempty"`
+	UpdateDate      string             `json:"updateDate" bson:"updateDate,omitempty"`
+	CreatorDataHref string             `json:"creatorDataHref" bson:"creatorDataHref,omitempty"`
+	CreatorDataName string             `json:"creatorDataName" bson:"creatorDataName,omitempty"`
+	ImgDataSrc      string             `json:"liveAttdc" bson:"imgDataSrc,omitempty"`
+	LiveAttdc       int32              `json:"liveAttdc" bson:"liveAttdc,omitempty"`
+	LiveDataHref    string             `json:"liveDataHref" bson:"liveDataHref,omitempty"`
+	LiveDataTitle   string             `json:"liveDataTitle" bson:"liveDataTitle,omitempty"`
+	Category        string             `json:"category" bson:"category,omitempty"`
+	Detail          string             `json:"platform" bson:"detail,omitempty"`
 }
 
 // LiveListForAdmin struct
