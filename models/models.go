@@ -23,12 +23,12 @@ type LiveList struct {
 	UpdateDate      string             `json:"updateDate" bson:"updateDate,omitempty"`
 	CreatorDataHref string             `json:"creatorDataHref" bson:"creatorDataHref,omitempty"`
 	CreatorDataName string             `json:"creatorDataName" bson:"creatorDataName,omitempty"`
-	ImgDataSrc      string             `json:"liveAttdc" bson:"imgDataSrc,omitempty"`
+	ImgDataSrc      string             `json:"imgDataSrc" bson:"imgDataSrc,omitempty"`
 	LiveAttdc       int32              `json:"liveAttdc" bson:"liveAttdc,omitempty"`
 	LiveDataHref    string             `json:"liveDataHref" bson:"liveDataHref,omitempty"`
 	LiveDataTitle   string             `json:"liveDataTitle" bson:"liveDataTitle,omitempty"`
 	Category        string             `json:"category" bson:"category,omitempty"`
-	Detail          string             `json:"platform" bson:"detail,omitempty"`
+	Detail          string             `json:"detail" bson:"detail,omitempty"`
 }
 
 // LiveListForAdmin struct
