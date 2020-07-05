@@ -241,5 +241,5 @@ func SearchBar(query string) string {
 
 	sort := bson.M{"liveAttdc": -1}
 
-	return crud.AllData(colNameLive, filter, sort)
+	return crud.AllDataReturnJson(colNameLive, filter, sort)
 }
