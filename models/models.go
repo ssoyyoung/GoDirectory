@@ -23,6 +23,7 @@ type LiveList struct {
 	UpdateDate      string             `json:"updateDate" bson:"updateDate,omitempty"`
 	CreatorDataHref string             `json:"creatorDataHref" bson:"creatorDataHref,omitempty"`
 	CreatorDataName string             `json:"creatorDataName" bson:"creatorDataName,omitempty"`
+	CreatorDataLogo string             `json:"creatorDataLogo" bson:"creatorDataLogo"`
 	ImgDataSrc      string             `json:"imgDataSrc" bson:"imgDataSrc,omitempty"`
 	LiveAttdc       int32              `json:"liveAttdc" bson:"liveAttdc,omitempty"`
 	LiveDataHref    string             `json:"liveDataHref" bson:"liveDataHref,omitempty"`
