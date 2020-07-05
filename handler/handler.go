@@ -6,6 +6,7 @@ import (
 
 	"github.com/labstack/echo"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
+	"github.com/ssoyyoung.p/GoDirectory/elastic"
 )
 
 // GetLiveStreamers func
@@ -157,4 +158,13 @@ func SearchBar(c echo.Context) error {
 	res := mongodb.SearchBar(query)
 
 	return c.String(http.StatusOK, res)
+}
+
+////////////////// Elastic Handler //////////////////
+
+// GetElasticInfo func
+func GetElasticInfo(c echo.Context) error {
+	info := elastic.ConnectES()
+
+	return c.String(http.StatusOK, info)
 }

@@ -1,5 +1,6 @@
 mongo/mongodb_auth.json
+elastic/elastic_auth.json
 mongo/backup
-idocs/*
+docs/*
 *.pem
 auth.json

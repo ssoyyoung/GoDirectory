@@ -39,7 +39,7 @@ func getAuth() m.Auth {
 // ConnectDB to MongoDB
 func ConnectDB() (client *mongo.Client, ctx context.Context, cancel context.CancelFunc) {
 	// Timeout 설정을 위한 Context생성
-	ctx, cancel = context.WithTimeout(context.Background(), 3*time.Second)
+	ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
 
 	Authrization := getAuth()
 

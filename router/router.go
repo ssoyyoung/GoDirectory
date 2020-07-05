@@ -75,5 +75,10 @@ func Router() *echo.Echo {
 		search.GET("/:query", handler.SearchBar)
 	}
 
+	elastic := e.Group("/ela")
+	{
+		elastic.GET("/info", handler.GetElasticInfo)
+	}
+
 	return e
 }

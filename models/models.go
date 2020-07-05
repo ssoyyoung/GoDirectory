@@ -59,3 +59,8 @@ type Auth struct {
 	Hostname string
 	Port     string
 }
+
+type AuthElastic struct {
+	HOST_IP string
+	PORT string
+}
