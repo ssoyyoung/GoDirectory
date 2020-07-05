@@ -1,13 +1,14 @@
 package elastic
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"reflect"
 	"os"
+	"encoding/json"
+	"io/ioutil"
 	"github.com/elastic/go-elasticsearch"
-	"github.com/ssoyyoung.p/GoDirectory/utils"
-	"github.com/ssoyyoung.p/GoDirectory/models"
+	U "github.com/ssoyyoung.p/GoDirectory/utils"
+	M "github.com/ssoyyoung.p/GoDirectory/models"
 )
 
 // TODO
@@ -18,9 +19,9 @@ import (
 func ConnectES() string{
 
 	data, err := os.Open("elastic/elastic_auth.json")
-	utils.CheckErr(err)
+	U.CheckErr(err)
 
-	var auth models.AuthElastic
+	var auth M.AuthElastic
 
 	byteValue, _ := ioutil.ReadAll(data)
 	json.Unmarshal(byteValue, &auth)
@@ -32,15 +33,22 @@ func ConnectES() string{
 	}
 
 	es, err := elasticsearch.NewClient(cfg)
-	utils.CheckErr(err)
+	U.CheckErr(err)
 
-	fmt.Println(es.Info())
+	//fmt.Println(es.Info())
 	
-	//esInfo := es.Info()
-	// var u ES
-	// dec := json.NewDecoder(esInfo)
-	// dec.Decode(&ES)
-	// fmt.Println(reflect.TypeOf(info))
+	esInfo, err := es.Info()
+	U.CheckErr(err)
+	fmt.Println(reflect.TypeOf(esInfo))
+
+	// mapResp := make(map[string]interface{})
+
+	// if err := json.NewDecoder(esInfo).Decode(&mapResp); err != nil {
+	// 	log.Fatalf("Error parsing the response body: %s", err)
+	// }	
+	//dec := json.NewDecoder(esInfo)
+	//dec.Decode(&res)
+	//fmt.Println(reflect.TypeOf(info))
 	
 	return  "done"
 }
