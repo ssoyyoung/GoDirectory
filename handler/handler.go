@@ -1,12 +1,12 @@
-package middleware
+package handler
 
 import (
 	"net/http"
 	"strings"
 
 	"github.com/labstack/echo"
-	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 	"github.com/ssoyyoung.p/GoDirectory/elastic"
+	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 )
 
 // GetLiveStreamers func
