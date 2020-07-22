@@ -39,7 +39,7 @@ func getAuth() m.Auth {
 // ConnectDB to MongoDB
 func ConnectDB() (client *mongo.Client, ctx context.Context, cancel context.CancelFunc) {
 	// Timeout 설정을 위한 Context생성
-	ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel = context.WithTimeout(context.Background(), 3*time.Second)
 
 	Authrization := getAuth()
 
@@ -128,6 +128,31 @@ func AllDataForAdmin(collection string, filter bson.M, sort bson.M) string {
 	}
 
 	jsonBytes, err := json.Marshal(admin)
+	jsonString := string(jsonBytes)
+
+	return jsonString
+}
+
+// AllScheduleList func
+func AllScheduleList(collection string, filter bson.M, sort bson.M) string {
+
+	var schedule []m.ScheduleList
+
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	findOptions := options.Find()
+	findOptions.SetSort(sort)
+
+	res, err := GetCollection(client, collection).Find(ctx, filter, findOptions)
+	U.CheckErr(err)
+
+	if err = res.All(ctx, &schedule); err != nil {
+		fmt.Println(err)
+	}
+
+	jsonBytes, err := json.Marshal(schedule)
 	jsonString := string(jsonBytes)
 
 	return jsonString

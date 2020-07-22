@@ -39,6 +39,7 @@ func Router() *echo.Echo {
 		getList.GET("/live/:category", handler.GetLiveStreamersByCate)
 		getList.GET("/following/:email", handler.GetLiveStreamersByFollower)
 		getList.GET("/block/:email", handler.GetLiveStreamersByBlocking)
+		getList.GET("/scheduleList", handler.GetScheduleList)
 	}
 
 	admin := e.Group("/admin")
@@ -75,10 +76,10 @@ func Router() *echo.Echo {
 		search.GET("/:query", handler.SearchBar)
 	}
 
-	elastic := e.Group("/ela")
-	{
-		elastic.GET("/info", handler.GetElasticInfo)
-	}
+	// elastic := e.Group("/ela")
+	// {
+	// 	elastic.GET("/info", handler.GetElasticInfo)
+	// }
 
 	return e
 }

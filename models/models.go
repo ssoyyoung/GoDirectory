@@ -4,6 +4,22 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
+// ScheduleList strict
+type ScheduleList struct {
+	ID          primitive.ObjectID `json:"_id" bson:"_id,omitempty"`
+	Uniq        string             `json:"_uniq" bson:"_uniq,omitempty"`
+	Channel     string             `json:"channel" bson:"channel,omitempty"`
+	ChannelID   string             `json:"channelID" bson:"channelID,omitempty"`
+	Description string             `json:"description" bson:"description,omitempty"`
+	Hours       string             `json:"hours" bson:"hours,omitempty"`
+	Image       string             `json:"image" bson:"image,omitempty"`
+	URL         string             `json:"url" bson:"url,omitempty"`
+	Live        bool               `json:"live" bson:"live,omitempty"`
+	Category    string             `json:"category" bson:"category,omitempty"`
+	Platform    string             `json:"platform" bson:"platform,omitempty"`
+	Days        []string           `json:"days" bson:"days,omitempty"`
+}
+
 // CrawlTarget struct
 type CrawlTarget struct {
 	ID        primitive.ObjectID `bson:"_id,omitempty"`
@@ -60,7 +76,8 @@ type Auth struct {
 	Port     string
 }
 
+// AuthElastic struct
 type AuthElastic struct {
 	HOST_IP string
-	PORT string
+	PORT    string
 }

@@ -1,13 +1,10 @@
-package elastic
+package main
 
 import (
-	"bytes"
-	"context"
 	"encoding/json"
 	"io/ioutil"
 	"log"
 	"os"
-	"strings"
 
 	"github.com/elastic/go-elasticsearch"
 	M "github.com/ssoyyoung.p/GoDirectory/models"
@@ -40,26 +37,23 @@ func ConnectES() *elasticsearch.Client {
 	U.CheckErr(err)
 	log.Println(es.Info())
 
-	// mapResp := make(map[string]interface{})
-
-	// if err := json.NewDecoder(esInfo).Decode(&mapResp); err != nil {
-	// 	log.Fatalf("Error parsing the response body: %s", err)
-	// }
-	//dec := json.NewDecoder(esInfo)
-	//dec.Decode(&res)
-	//fmt.Println(reflect.TypeOf(info))
-
 	return es
 }
 
-// GetAvgAttc func
+func main() {
+	ConnectES()
+}
+
+/* // GetAvgAttc func
 func GetAvgAttc() {
+	// connect elasticsearch
 	es := ConnectES
 	var (
 		buf bytes.Buffer
 		r   map[string]interface{}
 	)
 
+	// define query
 	query := map[string]interface{}{
 		"size": 0,
 		"query": map[string]interface{}{
@@ -140,3 +134,4 @@ func GetAvgAttc() {
 
 	log.Println(strings.Repeat("=", 37))
 }
+*/

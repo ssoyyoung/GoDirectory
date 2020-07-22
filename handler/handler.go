@@ -5,7 +5,6 @@ import (
 	"strings"
 
 	"github.com/labstack/echo"
-	"github.com/ssoyyoung.p/GoDirectory/elastic"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 )
 
@@ -160,11 +159,18 @@ func SearchBar(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
+// GetScheduleList func
+func GetScheduleList(c echo.Context) error {
+	res := mongodb.AllScheduleList()
+
+	return c.String(http.StatusOK, res)
+}
+
 ////////////////// Elastic Handler //////////////////
 
-// GetElasticInfo func
-func GetElasticInfo(c echo.Context) error {
-	info := elastic.ConnectES()
+//GetElasticInfo func
+// func GetElasticInfo(c echo.Context) error {
+// 	info := elastic.ConnectES()
 
-	return c.String(http.StatusOK, info)
-}
+// 	return c.String(http.StatusOK, info)
+// }

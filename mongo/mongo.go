@@ -10,6 +10,7 @@ import (
 // Collection name
 const colNameLive = "live_list"
 const colNameUser = "user_info"
+const colNameSchedule = "schedule_list"
 
 // LiveTrueList func
 func LiveTrueList() string {
@@ -56,6 +57,15 @@ func LiveAllList() string {
 	sort := bson.M{}
 
 	return crud.AllDataForAdmin(colNameLive, filter, sort) // change!
+}
+
+// AllScheduleList func
+func AllScheduleList() string {
+
+	filter := bson.M{}
+	sort := bson.M{}
+
+	return crud.AllScheduleList(colNameSchedule, filter, sort)
 }
 
 // GetCategoryList func
