@@ -165,12 +165,3 @@ func GetScheduleList(c echo.Context) error {
 
 	return c.String(http.StatusOK, res)
 }
-
-////////////////// Elastic Handler //////////////////
-
-//GetElasticInfo func
-// func GetElasticInfo(c echo.Context) error {
-// 	info := elastic.ConnectES()
-
-// 	return c.String(http.StatusOK, info)
-// }
