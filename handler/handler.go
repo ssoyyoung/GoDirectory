@@ -165,3 +165,5 @@ func GetScheduleList(c echo.Context) error {
 
 	return c.String(http.StatusOK, res)
 }
+
+// GetScheduleList func (order by)
