@@ -10,11 +10,11 @@ type ScheduleList struct {
 	Uniq        string             `json:"_uniq" bson:"_uniq,omitempty"`
 	Channel     string             `json:"channel" bson:"channel,omitempty"`
 	ChannelID   string             `json:"channelID" bson:"channelID,omitempty"`
+	Title       string             `json:"title" bson:"title,omitempty"`
 	Description string             `json:"description" bson:"description,omitempty"`
-	Hours       string             `json:"hours" bson:"hours,omitempty"`
 	Image       string             `json:"image" bson:"image,omitempty"`
 	URL         string             `json:"url" bson:"url,omitempty"`
-	Live        bool               `json:"live" bson:"live,omitempty"`
+	Regular     bool               `json:"regular" bson:"regular,omitempty"`
 	Category    string             `json:"category" bson:"category,omitempty"`
 	Platform    string             `json:"platform" bson:"platform,omitempty"`
 	Days        []string           `json:"days" bson:"days,omitempty"`
