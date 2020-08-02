@@ -18,6 +18,10 @@ type ScheduleList struct {
 	Category    string             `json:"category" bson:"category,omitempty"`
 	Platform    string             `json:"platform" bson:"platform,omitempty"`
 	Days        []string           `json:"days" bson:"days,omitempty"`
+	Year        int                `json:"year" bson:"year,omitempty"`
+	Month       int                `json:"month" bson:"month,omitempty"`
+	Day         int                `json:"day" bson:"day,omitempty"`
+	Hours       string             `json:"hours" bson:"hours,omitempty"`
 }
 
 // CrawlTarget struct
