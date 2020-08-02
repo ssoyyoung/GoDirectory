@@ -143,13 +143,17 @@ func CheckDB(platform, channelID string) string {
 
 //CheckUser func
 func CheckUser(googleID, name, email string) bool {
+	following := []string{}
+	block := []string{}
 
 	filter := bson.M{"googleId": googleID, "name": name}
 	num := crud.Count(colNameUser, filter)
 	newData := m.UserInfo{
-		GoogleID: googleID,
-		Name:     name,
-		Email:    email,
+		GoogleID:  googleID,
+		Name:      name,
+		Email:     email,
+		Following: following,
+		Block:     block,
 	}
 
 	if num == 0 {
