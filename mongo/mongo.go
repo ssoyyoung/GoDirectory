@@ -15,7 +15,14 @@ const colNameSchedule = "schedule_list"
 // LiveTrueList func
 func LiveTrueList() string {
 
+	language := []string{"ko", "kr"} // Adding language filter
+
 	filter := bson.M{"onLive": true}
+	orQuery := []bson.M{}
+	orQuery = append(orQuery, bson.M{"language": bson.M{"$in": language}})
+
+	filter["$or"] = orQuery
+
 	sort := bson.M{"liveAttdc": -1}
 
 	return crud.AllData(colNameLive, filter, sort)
