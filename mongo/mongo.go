@@ -70,7 +70,9 @@ func LiveAllList() string {
 
 // AllScheduleList func
 func AllScheduleList() string {
-	currentTime := time.Now()
+
+	currentTime := time.Now() //get current time
+
 	filter := bson.M{
 		"month": bson.M{
 			"$gte": currentTime.Month(),
