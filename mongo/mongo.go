@@ -1,6 +1,8 @@
 package mongo
 
 import (
+	"time"
+
 	m "github.com/ssoyyoung.p/GoDirectory/models"
 	crud "github.com/ssoyyoung.p/GoDirectory/mongo/crud"
 	U "github.com/ssoyyoung.p/GoDirectory/utils"
@@ -61,8 +63,15 @@ func LiveAllList() string {
 
 // AllScheduleList func
 func AllScheduleList() string {
-
-	filter := bson.M{}
+	currentTime := time.Now()
+	filter := bson.M{
+		"month": bson.M{
+			"$gte": currentTime.Month(),
+		},
+		"day": bson.M{
+			"$gte": currentTime.Day(),
+		},
+	}
 	sort := bson.M{}
 
 	return crud.AllScheduleList(colNameSchedule, filter, sort)
