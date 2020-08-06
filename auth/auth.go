@@ -70,10 +70,11 @@ func GoogleLogin(c echo.Context) error {
 		}
 		mongodb.UpdateUser(googleID, t)
 		return c.JSON(http.StatusOK, map[string]interface{}{
-			"token":    t,
-			"name":     name,
-			"email":    email,
-			"googleID": googleID,
+			"token":     t,
+			"token_exp": claims["exp"],
+			"name":      name,
+			"email":     email,
+			"googleID":  googleID,
 		})
 	}
 	return echo.ErrUnauthorized
