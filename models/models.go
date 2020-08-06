@@ -68,8 +68,8 @@ type UserInfo struct {
 	Name      string             `bson:"name,omitempty"`
 	Email     string             `bson:"email,omitempty"`
 	Token     string             `bson:"token,omitempty"`
-	Following []string           `bson:"following,omitempty"`
-	Block     []string           `bson:"block,omitempty"`
+	Following []string           `bson:"following"`
+	Block     []string           `bson:"block"`
 }
 
 //Auth struct
