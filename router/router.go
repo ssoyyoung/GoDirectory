@@ -66,6 +66,11 @@ func Router() *echo.Echo {
 		unfollowing.GET("/getUserInfo/:email", handler.GetBlocking)
 	}
 
+	feedback := e.Group("/feedback")
+	{
+		feedback.POST("/send", handler.InsertFeedback)
+	}
+
 	login := e.Group("/login")
 	{
 		login.POST("", auth.GoogleLogin)

@@ -85,3 +85,11 @@ type AuthElastic struct {
 	HOST_IP string
 	PORT    string
 }
+
+// Feedback struct
+type Feedback struct {
+	ID      primitive.ObjectID `bson:"_id,omitempty"`
+	Email   string             `bson:"email,omitempty"`
+	Title   string             `bson:"title,omitempty"`
+	Message string             `bson:"message,omitempty"`
+}

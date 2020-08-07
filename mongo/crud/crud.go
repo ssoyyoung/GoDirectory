@@ -255,3 +255,15 @@ func Count(collection string, filter bson.M) int64 {
 
 	return res
 }
+
+// InsertFeedback func
+func InsertFeedback(collection string, newData m.Feedback) string {
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	_, err := GetCollection(client, collection).InsertOne(ctx, newData)
+	U.CheckErr(err)
+
+	return "Done!"
+}

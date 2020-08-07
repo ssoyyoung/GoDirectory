@@ -13,6 +13,7 @@ import (
 const colNameLive = "live_list"
 const colNameUser = "user_info"
 const colNameSchedule = "schedule_list"
+const colNameFeedback = "feedback"
 
 // LiveTrueList func
 func LiveTrueList() string {
@@ -274,4 +275,15 @@ func SearchBar(query string) string {
 	sort := bson.M{"liveAttdc": -1}
 
 	return crud.AllDataReturnJson(colNameLive, filter, sort)
+}
+
+// InsertFeedback func
+func InsertFeedback(title, email, message string) string {
+	newData := m.Feedback{
+		Email:   email,
+		Title:   title,
+		Message: message,
+	}
+
+	return crud.InsertFeedback(colNameFeedback, newData)
 }

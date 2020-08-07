@@ -166,4 +166,12 @@ func GetScheduleList(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
-// GetScheduleList func (order by)
+// InsertFeedback func
+func InsertFeedback(c echo.Context) error {
+	title := c.FormValue("title")
+	email := c.FormValue("email")
+	message := c.FormValue("message")
+
+	res := mongodb.InsertFeedback(title, email, message)
+	return c.String(http.StatusOK, res)
+}
