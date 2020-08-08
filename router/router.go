@@ -71,6 +71,12 @@ func Router() *echo.Echo {
 		feedback.POST("/send", handler.InsertFeedback)
 	}
 
+	logs := e.Group("/logs")
+	{
+		logs.POST("/userHistory", handler.InsertUserHistory)
+		logs.POST("/viewHistory", handler.InsertViewHistory)
+	}
+
 	login := e.Group("/login")
 	{
 		login.POST("", auth.GoogleLogin)

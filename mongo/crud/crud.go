@@ -267,3 +267,27 @@ func InsertFeedback(collection string, newData m.Feedback) string {
 
 	return "Done!"
 }
+
+// InsertFeedback func
+func InsertUserHistory(collection string, newData m.UserHistory) string {
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	_, err := GetCollection(client, collection).InsertOne(ctx, newData)
+	U.CheckErr(err)
+
+	return "Done!"
+}
+
+// InsertFeedback func
+func InsertViewHistory(collection string, newData m.UserViewHistory) string {
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	_, err := GetCollection(client, collection).InsertOne(ctx, newData)
+	U.CheckErr(err)
+
+	return "Done!"
+}

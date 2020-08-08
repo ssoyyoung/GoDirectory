@@ -14,6 +14,8 @@ const colNameLive = "live_list"
 const colNameUser = "user_info"
 const colNameSchedule = "schedule_list"
 const colNameFeedback = "feedback"
+const colNameUserHistory = "userHistory"
+const colNameUserViewHistory = "userViewHistory"
 
 // LiveTrueList func
 func LiveTrueList() string {
@@ -286,4 +288,27 @@ func InsertFeedback(title, email, message string) string {
 	}
 
 	return crud.InsertFeedback(colNameFeedback, newData)
+}
+
+// InsertUserHistory func
+func InsertUserHistory(username, pathname, residencetime string) string {
+	newData := m.UserHistory{
+		Username:      username,
+		Pathname:      pathname,
+		Residencetime: residencetime,
+	}
+
+	return crud.InsertUserHistory(colNameFeedback, newData)
+}
+
+// InsertViewHistory func
+func InsertViewHistory(username, streaming, platform, _uniq string) string {
+	newData := m.UserViewHistory{
+		Username:  username,
+		Streaming: streaming,
+		Platform:  platform,
+		Uniq:      _uniq,
+	}
+
+	return crud.InsertViewHistory(colNameFeedback, newData)
 }

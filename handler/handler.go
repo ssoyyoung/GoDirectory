@@ -175,3 +175,24 @@ func InsertFeedback(c echo.Context) error {
 	res := mongodb.InsertFeedback(title, email, message)
 	return c.String(http.StatusOK, res)
 }
+
+// InsertUserHistory func
+func InsertUserHistory(c echo.Context) error {
+	username := c.FormValue("username")
+	pathname := c.FormValue("pathname")
+	residencetime := c.FormValue("residencetime")
+
+	res := mongodb.InsertUserHistory(username, pathname, residencetime)
+	return c.String(http.StatusOK, res)
+}
+
+// InsertViewHistory func
+func InsertViewHistory(c echo.Context) error {
+	username := c.FormValue("username")
+	streaming := c.FormValue("streaming")
+	platform := c.FormValue("platform")
+	_uniq := c.FormValue("_uniq")
+
+	res := mongodb.InsertViewHistory(username, streaming, platform, _uniq)
+	return c.String(http.StatusOK, res)
+}

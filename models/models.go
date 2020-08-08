@@ -93,3 +93,20 @@ type Feedback struct {
 	Title   string             `bson:"title,omitempty"`
 	Message string             `bson:"message,omitempty"`
 }
+
+// UserHistory struct
+type UserHistory struct {
+	ID            primitive.ObjectID `bson:"_id,omitempty"`
+	Username      string             `bson:"username,omitempty"`
+	Pathname      string             `bson:"pathname,omitempty"`
+	Residencetime string             `bson:"residencetime,omitempty"`
+}
+
+// UserViewHistory struct
+type UserViewHistory struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty"`
+	Username  string             `bson:"username,omitempty"`
+	Streaming string             `bson:"streaming,omitempty"`
+	Platform  string             `bson:"platform,omitempty"`
+	Uniq      string             `bson:"_uniq,omitempty"`
+}
