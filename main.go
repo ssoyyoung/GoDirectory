@@ -15,7 +15,7 @@ import (
 // @contact.email cracker.weare@gmail.com
 
 func main() {
-	debug := true
+	debug := false
 
 	echoR := router.Router()
 

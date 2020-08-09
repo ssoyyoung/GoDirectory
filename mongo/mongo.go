@@ -91,7 +91,12 @@ func AllScheduleList() string {
 
 // GetCategoryList func
 func GetCategoryList(cate string) string {
+	language := []string{"ko", "kr"} // Adding language filter
+
 	filter := bson.M{"onLive": true, "category": cate}
+	orQuery := []bson.M{}
+	orQuery = append(orQuery, bson.M{"language": bson.M{"$in": language}})
+
 	sort := bson.M{"liveAttdc": -1}
 
 	return crud.AllData(colNameLive, filter, sort)
