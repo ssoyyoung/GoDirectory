@@ -99,7 +99,7 @@ type UserHistory struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty"`
 	Username      string             `bson:"username,omitempty"`
 	Pathname      string             `bson:"pathname,omitempty"`
-	Residencetime string             `bson:"residencetime,omitempty"`
+	Residencetime int                `bson:"residencetime,omitempty"`
 }
 
 // UserViewHistory struct

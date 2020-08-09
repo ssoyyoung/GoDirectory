@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/labstack/echo"
@@ -180,7 +181,7 @@ func InsertFeedback(c echo.Context) error {
 func InsertUserHistory(c echo.Context) error {
 	username := c.FormValue("username")
 	pathname := c.FormValue("pathname")
-	residencetime := c.FormValue("residencetime")
+	residencetime, _ := strconv.Atoi(c.FormValue("residencetime"))
 
 	res := mongodb.InsertUserHistory(username, pathname, residencetime)
 	return c.String(http.StatusOK, res)

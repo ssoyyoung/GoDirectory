@@ -291,14 +291,14 @@ func InsertFeedback(title, email, message string) string {
 }
 
 // InsertUserHistory func
-func InsertUserHistory(username, pathname, residencetime string) string {
+func InsertUserHistory(username, pathname string, residencetime int) string {
 	newData := m.UserHistory{
 		Username:      username,
 		Pathname:      pathname,
 		Residencetime: residencetime,
 	}
 
-	return crud.InsertUserHistory(colNameFeedback, newData)
+	return crud.InsertUserHistory(colNameUserHistory, newData)
 }
 
 // InsertViewHistory func
@@ -310,5 +310,5 @@ func InsertViewHistory(username, streaming, platform, _uniq string) string {
 		Uniq:      _uniq,
 	}
 
-	return crud.InsertViewHistory(colNameFeedback, newData)
+	return crud.InsertViewHistory(colNameUserViewHistory, newData)
 }
