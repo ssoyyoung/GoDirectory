@@ -4,3 +4,4 @@ mongo/backup
 docs/*
 *.pem
 auth.json
+main.go
