@@ -62,6 +62,13 @@ func GetLiveStreamersByCate(c echo.Context) error {
 	return c.String(http.StatusOK, res)
 }
 
+// GetAllCategory func
+func GetAllCategory(c echo.Context) error {
+	// TODO
+
+	return c.String(http.StatusOK, "done")
+}
+
 // GetStreamerByID func
 func GetStreamerByID(c echo.Context) error {
 	id := c.Param("id")
