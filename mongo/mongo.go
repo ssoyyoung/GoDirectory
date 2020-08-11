@@ -104,6 +104,21 @@ func GetCategoryList(cate string) string {
 	return crud.AllData(colNameLive, filter, sort)
 }
 
+// GetCategoryCount func
+func GetCategoryCount(cate string) int {
+
+	language := []string{"ko", "kr"} // Adding language filter
+
+	filter := bson.M{"onLive": true, "category": cate}
+	orQuery := []bson.M{}
+	orQuery = append(orQuery, bson.M{"language": bson.M{"$in": language}})
+	filter["$or"] = orQuery
+
+	sort := bson.M{"liveAttdc": -1}
+
+	return crud.AllDataCount(colNameLive, filter, sort)
+}
+
 // SearchDBbyID func
 func SearchDBbyID(id string) string {
 

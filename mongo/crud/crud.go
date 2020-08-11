@@ -77,8 +77,31 @@ func AllData(collection string, filter bson.M, sort bson.M) string {
 	if err = res.All(ctx, &datas); err != nil {
 		fmt.Println(err)
 	}
+	fmt.Println("here", len(datas))
 
 	return U.JSONMarshalString(datas)
+}
+
+// AllDataCount func
+func AllDataCount(collection string, filter bson.M, sort bson.M) int {
+	// define bson.M type data
+	var datas []bson.M
+
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	findOptions := options.Find()
+	findOptions.SetSort(sort)
+
+	res, err := GetCollection(client, collection).Find(ctx, filter, findOptions)
+	U.CheckErr(err)
+
+	if err = res.All(ctx, &datas); err != nil {
+		fmt.Println(err)
+	}
+
+	return len(datas)
 }
 
 // AllDataReturnJson func

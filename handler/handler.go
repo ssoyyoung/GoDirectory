@@ -64,9 +64,15 @@ func GetLiveStreamersByCate(c echo.Context) error {
 
 // GetAllCategory func
 func GetAllCategory(c echo.Context) error {
-	// TODO
+	cateList := []string{"GAME", "MUSIC", "CHATTING", "SHOPPING", "NEWS", "AIR", "SPORTS", "COOKING"}
 
-	return c.String(http.StatusOK, "done")
+	result := map[string]int{}
+	for _, cate := range cateList {
+		res := mongodb.GetCategoryCount(cate)
+		result[cate] = res
+	}
+
+	return c.JSON(http.StatusOK, result)
 }
 
 // GetStreamerByID func

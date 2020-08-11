@@ -37,6 +37,7 @@ func Router() *echo.Echo {
 	{
 		getList.GET("/live", handler.GetLiveStreamers)
 		getList.GET("/live/:category", handler.GetLiveStreamersByCate)
+		getList.GET("/live/allCate", handler.GetAllCategory)
 		getList.GET("/following/:email", handler.GetLiveStreamersByFollower)
 		getList.GET("/block/:email", handler.GetLiveStreamersByBlocking)
 		getList.GET("/scheduleList", handler.GetScheduleList)
