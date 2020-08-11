@@ -75,13 +75,20 @@ func LiveAllList() string {
 func AllScheduleList() string {
 
 	currentTime := time.Now() //get current time
+	month := currentTime.Month()
+	day := currentTime.Day() - 7
+
+	if day < 1 {
+		month = month - 1
+		day = 31 + day
+	}
 
 	filter := bson.M{
 		"month": bson.M{
-			"$gte": currentTime.Month(),
+			"$gte": month,
 		},
 		"day": bson.M{
-			"$gte": currentTime.Day(),
+			"$gte": day,
 		},
 	}
 	sort := bson.M{}
