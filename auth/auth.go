@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -42,6 +43,31 @@ func contains(v string, a []string) bool {
 		}
 	}
 	return false
+}
+
+// SignUp func
+func SignUp(c echo.Context) error {
+	id, password, nickname, birthday, tags := c.FormValue("id"), c.FormValue("password"), c.FormValue("nickname"), c.FormValue("birthday"), c.FormValue("tags")
+	tagList := strings.Split(tags, ",")
+
+	token := jwt.New(jwt.SigningMethodHS256)
+	claims := token.Claims.(jwt.MapClaims)
+	claims["nickname"] = nickname
+	claims["id"] = id
+	claims["admin"] = false
+
+	t, err := token.SignedString([]byte("secret"))
+	if err != nil {
+		return err
+	}
+
+	mongodb.SignUp(id, password, nickname, birthday, t, tagList)
+	return c.JSON(http.StatusOK, map[string]interface{}{
+		"token":     t,
+		"token_exp": claims["exp"],
+		"nickname":  nickname,
+		"id":        id,
+	})
 }
 
 // GoogleLogin func

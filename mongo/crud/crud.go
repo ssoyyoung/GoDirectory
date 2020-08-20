@@ -267,6 +267,18 @@ func CreateUser(collection string, newData m.UserInfo) string {
 	return "create!"
 }
 
+// CreateSignUpUser func
+func CreateSignUpUser(collection string, newData m.SignUp) string {
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	_, err := GetCollection(client, collection).InsertOne(ctx, newData)
+	U.CheckErr(err)
+
+	return "create!"
+}
+
 // Count func
 func Count(collection string, filter bson.M) int64 {
 	client, ctx, cancel := ConnectDB()

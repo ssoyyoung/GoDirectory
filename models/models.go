@@ -110,3 +110,16 @@ type UserViewHistory struct {
 	Platform  string             `bson:"platform,omitempty"`
 	Uniq      string             `bson:"_uniq,omitempty"`
 }
+
+// SignUp struct
+type SignUp struct {
+	ID        primitive.ObjectID `bson:"_id,omitempty"`
+	UserID    string             `bson:"userID,omitempty"`
+	Password  string             `bson:"password,omitempty"`
+	Nickname  string             `bson:"nickname,omitempty"`
+	Birthday  string             `bson:"birthday,omitempty"`
+	Tags      []string           `bson:"tags,omitempty"`
+	Token     string             `bson:"token,omitempty"`
+	Following []string           `bson:"following"`
+	Block     []string           `bson:"block"`
+}

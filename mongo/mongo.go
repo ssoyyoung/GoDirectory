@@ -16,6 +16,7 @@ const colNameSchedule = "schedule_list"
 const colNameFeedback = "feedback"
 const colNameUserHistory = "userHistory"
 const colNameUserViewHistory = "userViewHistory"
+const colNameSignUp = "userList"
 
 // LiveTrueList func
 func LiveTrueList() string {
@@ -340,4 +341,23 @@ func InsertViewHistory(username, streaming, platform, _uniq string) string {
 	}
 
 	return crud.InsertViewHistory(colNameUserViewHistory, newData)
+}
+
+// SignUp func
+func SignUp(id, password, nickname, birthday, t string, tags []string) string {
+	following := []string{}
+	block := []string{}
+
+	signUpData := m.SignUp{
+		UserID:    id,
+		Password:  password,
+		Nickname:  nickname,
+		Birthday:  birthday,
+		Tags:      tags,
+		Token:     t,
+		Following: following,
+		Block:     block,
+	}
+
+	return crud.CreateSignUpUser(colNameSignUp, signUpData)
 }
