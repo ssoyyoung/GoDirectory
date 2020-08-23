@@ -210,3 +210,8 @@ func InsertViewHistory(c echo.Context) error {
 	res := mongodb.InsertViewHistory(username, streaming, platform, _uniq)
 	return c.String(http.StatusOK, res)
 }
+
+// CheckID func
+func CheckID(c echo.Context) error {
+
+}

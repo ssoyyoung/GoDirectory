@@ -344,15 +344,17 @@ func InsertViewHistory(username, streaming, platform, _uniq string) string {
 }
 
 // SignUp func
-func SignUp(id, password, nickname, birthday, t string, tags []string) string {
+func SignUp(id, serialNo, password, nickname, birthday, t string, tags, ctags []string) string {
 	following := []string{}
 	block := []string{}
 
 	signUpData := m.SignUp{
 		UserID:    id,
+		SerialNo:  serialNo,
 		Password:  password,
 		Nickname:  nickname,
 		Birthday:  birthday,
+		Ctags:     ctags,
 		Tags:      tags,
 		Token:     t,
 		Following: following,

@@ -86,6 +86,7 @@ func Router() *echo.Echo {
 	signup := e.Group("/signUp")
 	{
 		signup.POST("", auth.SignUp)
+		signup.POST("/checkID", handler.CheckID)
 	}
 
 	search := e.Group("/search")

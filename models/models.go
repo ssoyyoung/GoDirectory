@@ -115,9 +115,11 @@ type UserViewHistory struct {
 type SignUp struct {
 	ID        primitive.ObjectID `bson:"_id,omitempty"`
 	UserID    string             `bson:"userID,omitempty"`
+	SerialNo  string             `bson:"serialNo,omitempty"`
 	Password  string             `bson:"password,omitempty"`
 	Nickname  string             `bson:"nickname,omitempty"`
 	Birthday  string             `bson:"birthday,omitempty"`
+	Ctags     []string           `bson:"ctags,omitempty"`
 	Tags      []string           `bson:"tags,omitempty"`
 	Token     string             `bson:"token,omitempty"`
 	Following []string           `bson:"following"`
