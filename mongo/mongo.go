@@ -213,6 +213,21 @@ func CheckUser(googleID, name, email string) bool {
 	return true
 }
 
+// CheckID func
+func CheckID(userID, serialNo string) string {
+
+	filter := bson.M{"userID": userID, "serialNo": serialNo}
+
+	num := crud.Count(colNameSignUp, filter)
+
+	if num == 0 {
+		return "false"
+	}
+
+	return "true"
+
+}
+
 // UpdateUser func
 func UpdateUser(googleID, token string) string {
 

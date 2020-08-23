@@ -213,5 +213,10 @@ func InsertViewHistory(c echo.Context) error {
 
 // CheckID func
 func CheckID(c echo.Context) error {
+	userID := c.FormValue("id")
+	serialNo := c.FormValue("serialNo")
 
+	res := mongodb.CheckID(userID, serialNo)
+
+	return c.String(http.StatusOK, res)
 }
