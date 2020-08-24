@@ -7,6 +7,7 @@ import (
 
 	"github.com/labstack/echo"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
+	"github.com/ssoyyoung.p/GoDirectory/utils"
 )
 
 // GetLiveStreamers func
@@ -169,6 +170,22 @@ func GetBlocking(c echo.Context) error {
 func SearchBar(c echo.Context) error {
 	query := c.Param("query")
 	res := mongodb.SearchBar(query)
+
+	return c.String(http.StatusOK, res)
+}
+
+// GetScheduleListByDays func
+func GetScheduleListByDays(c echo.Context) error {
+	month := c.FormValue("month")
+	day := c.FormValue("days")
+	hours := c.FormValue("hours")
+
+	m, error := strconv.Atoi(month)
+	utils.CheckErr(error)
+	d, error := strconv.Atoi(day)
+	utils.CheckErr(error)
+
+	res := mongodb.GetScheduleListByDay(m, d, hours)
 
 	return c.String(http.StatusOK, res)
 }

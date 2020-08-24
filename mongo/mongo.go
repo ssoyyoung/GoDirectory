@@ -97,6 +97,22 @@ func AllScheduleList() string {
 	return crud.AllScheduleList(colNameSchedule, filter, sort)
 }
 
+// GetScheduleListByDay func
+func GetScheduleListByDay(month, day int, hours string) string {
+
+	if hours == "" {
+		filter := bson.M{"month": month, "day": day}
+		sort := bson.M{}
+		return crud.AllScheduleList(colNameSchedule, filter, sort)
+	}
+
+	hours += ":00"
+	filter := bson.M{"month": month, "day": day, "hours": hours}
+	sort := bson.M{}
+	return crud.AllScheduleList(colNameSchedule, filter, sort)
+
+}
+
 // GetCategoryList func
 func GetCategoryList(cate string) string {
 
