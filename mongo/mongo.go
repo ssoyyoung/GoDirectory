@@ -230,17 +230,20 @@ func CheckUser(googleID, name, email string) bool {
 }
 
 // CheckID func
-func CheckID(userID, serialNo string) string {
+func CheckID(userID string) (string, string) {
 
-	filter := bson.M{"userID": userID, "serialNo": serialNo}
+	filter := bson.M{"userID": userID}
+	sort := bson.M{}
 
 	num := crud.Count(colNameSignUp, filter)
 
 	if num == 0 {
-		return "false"
+		return "false", ""
 	}
 
-	return "true"
+	res := crud.GetSerialNo(colNameSignUp, filter, sort)
+
+	return "true", res
 
 }
 

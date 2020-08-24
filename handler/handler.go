@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -238,10 +239,20 @@ func InsertViewHistory(c echo.Context) error {
 
 // CheckID func
 func CheckID(c echo.Context) error {
-	userID := c.FormValue("id")
-	serialNo := c.FormValue("serialNo")
+	type returnData struct {
+		Status   string
+		SerialNo string
+	}
 
-	res := mongodb.CheckID(userID, serialNo)
+	userID := c.FormValue("userID")
 
-	return c.String(http.StatusOK, res)
+	status, res := mongodb.CheckID(userID)
+	fmt.Println(status, res)
+
+	rData := returnData{
+		Status:   status,
+		SerialNo: res,
+	}
+	//return c.String(http.StatusOK, status+res)
+	return c.JSON(http.StatusOK, rData)
 }
