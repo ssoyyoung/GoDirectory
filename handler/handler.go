@@ -176,9 +176,17 @@ func SearchBar(c echo.Context) error {
 
 // GetScheduleListByDays func
 func GetScheduleListByDays(c echo.Context) error {
-	month := c.FormValue("month")
-	day := c.FormValue("days")
-	hours := c.FormValue("hours")
+	month := c.QueryParam("month")
+	day := c.QueryParam("days")
+	hours := c.QueryParam("hours")
+
+	// month := c.FormValue("month")
+	// day := c.FormValue("days")
+	// hours := c.FormValue("hours")
+
+	if month == "" && day == "" {
+		return c.String(http.StatusOK, "Query Parameter is empty")
+	}
 
 	m, error := strconv.Atoi(month)
 	utils.CheckErr(error)
