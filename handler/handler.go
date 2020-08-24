@@ -177,8 +177,8 @@ func SearchBar(c echo.Context) error {
 // GetScheduleListByDays func
 func GetScheduleListByDays(c echo.Context) error {
 	month := c.QueryParam("month")
-	day := c.QueryParam("days")
-	hours := c.QueryParam("hours")
+	day := c.QueryParam("day")
+	hours := c.QueryParam("hour")
 
 	// month := c.FormValue("month")
 	// day := c.FormValue("days")

@@ -41,7 +41,7 @@ func Router() *echo.Echo {
 		getList.GET("/following/:email", handler.GetLiveStreamersByFollower)
 		getList.GET("/block/:email", handler.GetLiveStreamersByBlocking)
 		getList.GET("/scheduleList", handler.GetScheduleList)
-		getList.POST("/scheduleListByDay", handler.GetScheduleListByDays)
+		getList.GET("/scheduleListByDay", handler.GetScheduleListByDays)
 	}
 
 	admin := e.Group("/admin")
