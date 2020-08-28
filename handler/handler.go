@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/labstack/echo"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
@@ -17,6 +18,20 @@ import (
 // @Router /getList [get]
 // @Success 200
 func GetLiveStreamers(c echo.Context) error {
+	cookie, err := c.Cookie("mkoaUID")
+	if cookie != nil {
+		fmt.Println("cookie", cookie.Name, cookie.Value)
+	} else {
+		cookie := new(http.Cookie)
+		cookie.Name = "mkoaUID"
+		cookie.Value = "쿠키 테스트"
+		cookie.Domain = "mkoa.sparker.kr"
+		cookie.Expires = time.Now().Add(24 * time.Hour)
+		c.SetCookie(cookie)
+	}
+
+	utils.CheckErr(err)
+
 	res := mongodb.LiveTrueList() //Get live data (desc)
 
 	return c.String(http.StatusOK, res)
