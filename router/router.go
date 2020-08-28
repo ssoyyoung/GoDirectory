@@ -99,6 +99,7 @@ func Router() *echo.Echo {
 	cookies := e.Group("/cookie")
 	{
 		cookies.GET("/writeCookie", cookie.WriteCookie)
+		cookies.GET("/readCookie", cookie.ReadCookie)
 	}
 
 	return e

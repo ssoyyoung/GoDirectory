@@ -8,8 +8,8 @@ import (
 	"github.com/labstack/echo"
 )
 
-// WriteCookies func
-func WriteCookies(c echo.Context) error {
+// WriteCookie func
+func WriteCookie(c echo.Context) error {
 	cookie := new(http.Cookie)
 	cookie.Name = "uid"
 	cookie.Value = "test"
@@ -19,8 +19,8 @@ func WriteCookies(c echo.Context) error {
 	return c.String(http.StatusOK, "write a cookie")
 }
 
-// ReadCookies func
-func ReadCookies(c echo.Context) error {
+// ReadCookie func
+func ReadCookie(c echo.Context) error {
 	cookie, err := c.Cookie("uid")
 	if err != nil {
 		return err
