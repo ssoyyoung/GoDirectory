@@ -96,5 +96,10 @@ func Router() *echo.Echo {
 		search.GET("/:query", handler.SearchBar)
 	}
 
+	cookie := e.Group("cookie")
+	{
+		cookie.GET("/get", cookie.GetCookieTest)
+	}
+
 	return e
 }
