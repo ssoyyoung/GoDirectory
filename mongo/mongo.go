@@ -344,8 +344,9 @@ func SearchBar(query string) string {
 }
 
 // InsertFeedback func
-func InsertFeedback(title, email, message string) string {
+func InsertFeedback(cookie, title, email, message string) string {
 	newData := m.Feedback{
+		Cookie:  cookie,
 		Email:   email,
 		Title:   title,
 		Message: message,
@@ -355,8 +356,9 @@ func InsertFeedback(title, email, message string) string {
 }
 
 // InsertUserHistory func
-func InsertUserHistory(username, pathname string, residencetime int) string {
+func InsertUserHistory(cookie, username, pathname string, residencetime int) string {
 	newData := m.UserHistory{
+		Cookie:        cookie,
 		Username:      username,
 		Pathname:      pathname,
 		Residencetime: residencetime,
@@ -366,8 +368,9 @@ func InsertUserHistory(username, pathname string, residencetime int) string {
 }
 
 // InsertViewHistory func
-func InsertViewHistory(username, streaming, platform, _uniq string) string {
+func InsertViewHistory(cookie, username, streaming, platform, _uniq string) string {
 	newData := m.UserViewHistory{
+		Cookie:    cookie,
 		Username:  username,
 		Streaming: streaming,
 		Platform:  platform,

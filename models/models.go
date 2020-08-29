@@ -89,6 +89,7 @@ type AuthElastic struct {
 // Feedback struct
 type Feedback struct {
 	ID      primitive.ObjectID `bson:"_id,omitempty"`
+	Cookie  string             `bson:"cookie,omitempty"`
 	Email   string             `bson:"email,omitempty"`
 	Title   string             `bson:"title,omitempty"`
 	Message string             `bson:"message,omitempty"`
@@ -97,6 +98,7 @@ type Feedback struct {
 // UserHistory struct
 type UserHistory struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty"`
+	Cookie        string             `bson:"cookie,omitempty"`
 	Username      string             `bson:"username,omitempty"`
 	Pathname      string             `bson:"pathname,omitempty"`
 	Residencetime int                `bson:"residencetime,omitempty"`
@@ -105,6 +107,7 @@ type UserHistory struct {
 // UserViewHistory struct
 type UserViewHistory struct {
 	ID        primitive.ObjectID `bson:"_id,omitempty"`
+	Cookie    string             `bson:"cookie,omitempty"`
 	Username  string             `bson:"username,omitempty"`
 	Streaming string             `bson:"streaming,omitempty"`
 	Platform  string             `bson:"platform,omitempty"`

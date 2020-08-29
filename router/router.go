@@ -8,7 +8,7 @@ import (
 	auth "github.com/ssoyyoung.p/GoDirectory/auth"
 
 	//_ "github.com/ssoyyoung.p/GoDirectory/docs"
-	cookie "github.com/ssoyyoung.p/GoDirectory/cookie"
+
 	handler "github.com/ssoyyoung.p/GoDirectory/handler"
 )
 
@@ -32,7 +32,6 @@ func Router() *echo.Echo {
 	e.GET("/healthy", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Healthy!")
 	})
-	
 
 	// Router List
 	getList := e.Group("getList")
@@ -95,12 +94,6 @@ func Router() *echo.Echo {
 	search := e.Group("/search")
 	{
 		search.GET("/:query", handler.SearchBar)
-	}
-
-	cookies := e.Group("/cookie")
-	{
-		cookies.GET("/set", cookie.SetCookie)
-		cookies.GET("/get", cookie.GetCookie)
 	}
 
 	return e

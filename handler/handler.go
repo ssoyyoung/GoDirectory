@@ -6,6 +6,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/ssoyyoung.p/GoDirectory/cookie"
+
 	"github.com/labstack/echo"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 	"github.com/ssoyyoung.p/GoDirectory/utils"
@@ -208,32 +210,35 @@ func GetScheduleList(c echo.Context) error {
 
 // InsertFeedback func
 func InsertFeedback(c echo.Context) error {
+	cookie := cookie.GetCookie(c)
 	title := c.FormValue("title")
 	email := c.FormValue("email")
 	message := c.FormValue("message")
 
-	res := mongodb.InsertFeedback(title, email, message)
+	res := mongodb.InsertFeedback(cookie, title, email, message)
 	return c.String(http.StatusOK, res)
 }
 
 // InsertUserHistory func
 func InsertUserHistory(c echo.Context) error {
+	cookie := cookie.GetCookie(c)
 	username := c.FormValue("username")
 	pathname := c.FormValue("pathname")
 	residencetime, _ := strconv.Atoi(c.FormValue("residencetime"))
 
-	res := mongodb.InsertUserHistory(username, pathname, residencetime)
+	res := mongodb.InsertUserHistory(cookie, username, pathname, residencetime)
 	return c.String(http.StatusOK, res)
 }
 
 // InsertViewHistory func
 func InsertViewHistory(c echo.Context) error {
+	cookie := cookie.GetCookie(c)
 	username := c.FormValue("username")
 	streaming := c.FormValue("streaming")
 	platform := c.FormValue("platform")
 	_uniq := c.FormValue("_uniq")
 
-	res := mongodb.InsertViewHistory(username, streaming, platform, _uniq)
+	res := mongodb.InsertViewHistory(cookie, username, streaming, platform, _uniq)
 	return c.String(http.StatusOK, res)
 }
 
