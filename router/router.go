@@ -32,6 +32,7 @@ func Router() *echo.Echo {
 	e.GET("/healthy", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Healthy!")
 	})
+	
 
 	// Router List
 	getList := e.Group("getList")

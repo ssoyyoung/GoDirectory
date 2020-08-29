@@ -17,7 +17,6 @@ import (
 // @Router /getList [get]
 // @Success 200
 func GetLiveStreamers(c echo.Context) error {
-
 	res := mongodb.LiveTrueList() //Get live data (desc)
 
 	return c.String(http.StatusOK, res)
