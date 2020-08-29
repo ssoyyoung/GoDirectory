@@ -211,6 +211,7 @@ func GetScheduleList(c echo.Context) error {
 // InsertFeedback func
 func InsertFeedback(c echo.Context) error {
 	cookie := cookie.GetCookie(c)
+	fmt.Println("cookie", cookie)
 	title := c.FormValue("title")
 	email := c.FormValue("email")
 	message := c.FormValue("message")
