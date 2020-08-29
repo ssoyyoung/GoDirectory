@@ -8,10 +8,10 @@ import (
 	"github.com/labstack/echo"
 )
 
-// WriteCookie func
-func WriteCookie(c echo.Context) error {
+// SetCookie func
+func SetCookie(c echo.Context) error {
 	cookie := new(http.Cookie)
-	cookie.Name = "uid"
+	cookie.Name = "mkoaUID"
 	cookie.Value = "test"
 	cookie.Expires = time.Now().Add(24 * time.Hour)
 	c.SetCookie(cookie)
@@ -19,9 +19,9 @@ func WriteCookie(c echo.Context) error {
 	return c.String(http.StatusOK, "write a cookie")
 }
 
-// ReadCookie func
-func ReadCookie(c echo.Context) error {
-	cookie, err := c.Cookie("uid")
+// GetCookie func
+func GetCookie(c echo.Context) error {
+	cookie, err := c.Cookie("mkoaUID")
 	if err != nil {
 		return err
 	}

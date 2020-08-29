@@ -98,8 +98,8 @@ func Router() *echo.Echo {
 
 	cookies := e.Group("/cookie")
 	{
-		cookies.GET("/writeCookie", cookie.WriteCookie)
-		cookies.GET("/readCookie", cookie.ReadCookie)
+		cookies.GET("/set", cookie.SetCookie)
+		cookies.GET("/get", cookie.GetCookie)
 	}
 
 	return e
