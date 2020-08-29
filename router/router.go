@@ -9,6 +9,7 @@ import (
 
 	//_ "github.com/ssoyyoung.p/GoDirectory/docs"
 
+	cookie "github.com/ssoyyoung.p/GoDirectory/cookie"
 	handler "github.com/ssoyyoung.p/GoDirectory/handler"
 )
 
@@ -96,9 +97,9 @@ func Router() *echo.Echo {
 		search.GET("/:query", handler.SearchBar)
 	}
 
-	cookie := e.Group("cookie")
+	ck := e.Group("cookie")
 	{
-		cookie.GET("/get", cookie.GetCookieTest)
+		ck.GET("/get", cookie.GetCookieTest)
 	}
 
 	return e
