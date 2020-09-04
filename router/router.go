@@ -83,7 +83,8 @@ func Router() *echo.Echo {
 
 	login := e.Group("/login")
 	{
-		login.POST("", auth.GoogleLogin)
+		login.POST("/", auth.GoogleLogin)
+		//login.POST("/login", auth.Login))
 	}
 
 	signup := e.Group("/signUp")

@@ -48,7 +48,6 @@ func contains(v string, a []string) bool {
 // SignUp func
 func SignUp(c echo.Context) error {
 	id, serialNo, password, nickname, birthday, tags, ctags := c.FormValue("id"), c.FormValue("serialNo"), c.FormValue("password"), c.FormValue("nickname"), c.FormValue("birthday"), c.FormValue("tags"), c.FormValue("ctags")
-	fmt.Println(id, serialNo, password, nickname, birthday, tags, ctags)
 	tagList := strings.Split(tags, ",")
 	ctagList := strings.Split(ctags, ",")
 
@@ -107,6 +106,44 @@ func GoogleLogin(c echo.Context) error {
 	}
 	return echo.ErrUnauthorized
 }
+
+// Login func
+// func Login(c echo.Context) error {
+// 	userID, password := c.FormValue("userID"), c.FormValue("password")
+
+// 	if mongodb.CheckPW(userID, password) {
+// 		token := jwt.New(jwt.SigningMethodHS256)
+
+// 		claims := token.Claims.(jwt.MapClaims)
+// 		claims["name"] = name
+// 		claims["googleId"] = googleID
+// 		claims["admin"] = false
+
+// 		admin := getAdminUser()
+// 		switch {
+// 		case contains(email, admin.AdminUser):
+// 			claims["admin"] = true
+// 		}
+
+// 		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+
+// 		t, err := token.SignedString([]byte("secret"))
+// 		if err != nil {
+// 			return err
+// 		}
+
+// 		mongodb.UpdateUser(googleID, t)
+// 		return c.JSON(http.StatusOK, map[string]interface{}{
+// 			"token":     t,
+// 			"token_exp": claims["exp"],
+// 			"name":      name,
+// 			"email":     email,
+// 			"googleID":  googleID,
+// 		})
+
+// 		return echo.ErrUnauthorized
+// 	}
+// }
 
 // IsAdmin func
 func IsAdmin(next echo.HandlerFunc) echo.HandlerFunc {

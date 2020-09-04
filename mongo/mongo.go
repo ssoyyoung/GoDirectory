@@ -260,6 +260,19 @@ func UpdateUser(googleID, token string) string {
 	return crud.Update(colNameUser, filter, update)
 }
 
+// UpdateUserToken func
+func UpdateUserToken(userID, token string) string {
+
+	filter := bson.M{"userID": userID}
+	update := bson.M{
+		"$set": bson.M{
+			"token": token,
+		},
+	}
+
+	return crud.Update(colNameSignUp, filter, update)
+}
+
 // PushFollowing func
 func PushFollowing(following, email string) string {
 

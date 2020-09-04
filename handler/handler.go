@@ -6,8 +6,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ssoyyoung.p/GoDirectory/cookie"
-
 	"github.com/labstack/echo"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 	"github.com/ssoyyoung.p/GoDirectory/utils"
@@ -210,8 +208,8 @@ func GetScheduleList(c echo.Context) error {
 
 // InsertFeedback func
 func InsertFeedback(c echo.Context) error {
-	cookie := cookie.GetCookie(c)
-	fmt.Println("cookie", cookie)
+	//cookie := cookie.GetCookie(c)
+	cookie := "cookie"
 	title := c.FormValue("title")
 	email := c.FormValue("email")
 	message := c.FormValue("message")
@@ -222,7 +220,8 @@ func InsertFeedback(c echo.Context) error {
 
 // InsertUserHistory func
 func InsertUserHistory(c echo.Context) error {
-	cookie := cookie.GetCookie(c)
+	//cookie := cookie.GetCookie(c)
+	cookie := "cookie"
 	username := c.FormValue("username")
 	pathname := c.FormValue("pathname")
 	residencetime, _ := strconv.Atoi(c.FormValue("residencetime"))
@@ -233,7 +232,8 @@ func InsertUserHistory(c echo.Context) error {
 
 // InsertViewHistory func
 func InsertViewHistory(c echo.Context) error {
-	cookie := cookie.GetCookie(c)
+	//cookie := cookie.GetCookie(c)
+	cookie := "cookie"
 	username := c.FormValue("username")
 	streaming := c.FormValue("streaming")
 	platform := c.FormValue("platform")
