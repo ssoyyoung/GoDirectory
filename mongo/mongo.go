@@ -197,16 +197,16 @@ func CreateDB(platform, channel, channelID, category string) string {
 }
 
 // CheckPW func
-func CheckPW(userID, passWD string) bool {
+func CheckPW(userID, passWD string) (bool, string) {
 	filter := bson.M{"userID": userID}
 	sort := bson.M{}
 
-	dbPassWD := crud.GetPassWD(colNameSignUp, filter, sort)
+	dbPassWD, nickname := crud.GetPassWD(colNameSignUp, filter, sort)
 
 	if dbPassWD == passWD {
-		return true
+		return true, nickname
 	}
-	return false
+	return false, nickname
 }
 
 // CheckDB func

@@ -126,7 +126,7 @@ func GetSerialNo(collection string, filter bson.M, sort bson.M) string {
 }
 
 // GetPassWD func
-func GetPassWD(collection string, filter bson.M, sort bson.M) string {
+func GetPassWD(collection string, filter bson.M, sort bson.M) (string, string) {
 	// define bson.M type data
 	var datas []m.SignUp
 
@@ -144,7 +144,7 @@ func GetPassWD(collection string, filter bson.M, sort bson.M) string {
 		fmt.Println(err)
 	}
 
-	return datas[0].Password
+	return datas[0].Password, datas[0].Nickname
 }
 
 // AllDataReturnJson func

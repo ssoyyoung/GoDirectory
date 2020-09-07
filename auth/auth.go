@@ -111,7 +111,8 @@ func GoogleLogin(c echo.Context) error {
 func Login(c echo.Context) error {
 	userID, passWD := c.FormValue("userID"), c.FormValue("passWD")
 
-	if mongodb.CheckPW(userID, passWD) {
+	auth, nickname := mongodb.CheckPW(userID, passWD)
+	if auth {
 		token := jwt.New(jwt.SigningMethodHS256)
 
 		claims := token.Claims.(jwt.MapClaims)
@@ -129,6 +130,8 @@ func Login(c echo.Context) error {
 		return c.JSON(http.StatusOK, map[string]interface{}{
 			"token":     t,
 			"token_exp": claims["exp"],
+			"name":      nickname,
+			"email":     userID,
 			"userID":    userID,
 		})
 	}
