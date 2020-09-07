@@ -107,43 +107,33 @@ func GoogleLogin(c echo.Context) error {
 	return echo.ErrUnauthorized
 }
 
-// Login func
-// func Login(c echo.Context) error {
-// 	userID, password := c.FormValue("userID"), c.FormValue("password")
+//Login func
+func Login(c echo.Context) error {
+	userID, passWD := c.FormValue("userID"), c.FormValue("passWD")
 
-// 	if mongodb.CheckPW(userID, password) {
-// 		token := jwt.New(jwt.SigningMethodHS256)
+	if mongodb.CheckPW(userID, passWD) {
+		token := jwt.New(jwt.SigningMethodHS256)
 
-// 		claims := token.Claims.(jwt.MapClaims)
-// 		claims["name"] = name
-// 		claims["googleId"] = googleID
-// 		claims["admin"] = false
+		claims := token.Claims.(jwt.MapClaims)
+		claims["userID"] = userID
+		claims["admin"] = false
 
-// 		admin := getAdminUser()
-// 		switch {
-// 		case contains(email, admin.AdminUser):
-// 			claims["admin"] = true
-// 		}
+		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
 
-// 		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+		t, err := token.SignedString([]byte("secret"))
+		if err != nil {
+			return err
+		}
 
-// 		t, err := token.SignedString([]byte("secret"))
-// 		if err != nil {
-// 			return err
-// 		}
-
-// 		mongodb.UpdateUser(googleID, t)
-// 		return c.JSON(http.StatusOK, map[string]interface{}{
-// 			"token":     t,
-// 			"token_exp": claims["exp"],
-// 			"name":      name,
-// 			"email":     email,
-// 			"googleID":  googleID,
-// 		})
-
-// 		return echo.ErrUnauthorized
-// 	}
-// }
+		mongodb.UpdateUser(userID, t)
+		return c.JSON(http.StatusOK, map[string]interface{}{
+			"token":     t,
+			"token_exp": claims["exp"],
+			"userID":    userID,
+		})
+	}
+	return echo.ErrUnauthorized
+}
 
 // IsAdmin func
 func IsAdmin(next echo.HandlerFunc) echo.HandlerFunc {

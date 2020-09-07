@@ -123,8 +123,28 @@ func GetSerialNo(collection string, filter bson.M, sort bson.M) string {
 	}
 
 	return datas[0].SerialNo
+}
 
-	//return U.ConvertData(datas)
+// GetPassWD func
+func GetPassWD(collection string, filter bson.M, sort bson.M) string {
+	// define bson.M type data
+	var datas []m.SignUp
+
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	findOptions := options.Find()
+	findOptions.SetSort(sort)
+
+	res, err := GetCollection(client, collection).Find(ctx, filter, findOptions)
+	U.CheckErr(err)
+
+	if err = res.All(ctx, &datas); err != nil {
+		fmt.Println(err)
+	}
+
+	return datas[0].Password
 }
 
 // AllDataReturnJson func

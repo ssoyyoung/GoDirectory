@@ -196,6 +196,19 @@ func CreateDB(platform, channel, channelID, category string) string {
 	return "exist!"
 }
 
+// CheckPW func
+func CheckPW(userID, passWD string) bool {
+	filter := bson.M{"userID": userID}
+	sort := bson.M{}
+
+	dbPassWD := crud.GetPassWD(colNameSignUp, filter, sort)
+
+	if dbPassWD == passWD {
+		return true
+	}
+	return false
+}
+
 // CheckDB func
 func CheckDB(platform, channelID string) string {
 	filter := bson.M{"_uniq": platform + channelID}
@@ -258,6 +271,19 @@ func UpdateUser(googleID, token string) string {
 	}
 
 	return crud.Update(colNameUser, filter, update)
+}
+
+// UpdateUserInfo func
+func UpdateUserInfo(userID, token string) string {
+
+	filter := bson.M{"userID": userID}
+	update := bson.M{
+		"$set": bson.M{
+			"token": token,
+		},
+	}
+
+	return crud.Update(colNameSignUp, filter, update)
 }
 
 // UpdateUserToken func
