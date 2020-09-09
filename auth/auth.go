@@ -135,7 +135,9 @@ func Login(c echo.Context) error {
 			"userID":    userID,
 		})
 	}
-	return echo.ErrUnauthorized
+	return c.JSON(http.StatusForbidden, map[string]interface{}{
+		"message": "Unauthorized",
+	})
 }
 
 // IsAdmin func
