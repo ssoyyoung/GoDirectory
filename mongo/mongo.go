@@ -72,6 +72,15 @@ func LiveAllList() string {
 	return crud.AllDataForAdmin(colNameLive, filter, sort) // change!
 }
 
+// AllList func
+func AllList() string {
+
+	filter := bson.M{}
+	sort := bson.M{}
+
+	return crud.AllData(colNameLive, filter, sort) // change!
+}
+
 // AllScheduleList func
 func AllScheduleList() string {
 
@@ -124,6 +133,15 @@ func GetCategoryList(cate string) string {
 	filter["$or"] = orQuery
 
 	sort := bson.M{"liveAttdc": -1}
+
+	return crud.AllData(colNameLive, filter, sort)
+}
+
+// GetPlatformList func
+func GetPlatformList(platform string) string {
+
+	filter := bson.M{"platform": platform}
+	sort := bson.M{}
 
 	return crud.AllData(colNameLive, filter, sort)
 }

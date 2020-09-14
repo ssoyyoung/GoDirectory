@@ -51,7 +51,14 @@ func GetLiveStreamersByBlocking(c echo.Context) error {
 
 // GetStreamers func
 func GetStreamers(c echo.Context) error {
-	res := mongodb.LiveAllList() //Get all data  > crawl to live
+	res := mongodb.AllList() //Get all data  > crawl to live
+
+	return c.String(http.StatusOK, res)
+}
+
+// GetAllStreamers func
+func GetAllStreamers(c echo.Context) error {
+	res := mongodb.AllList() //Get all data  > crawl to live
 
 	return c.String(http.StatusOK, res)
 }
@@ -60,6 +67,14 @@ func GetStreamers(c echo.Context) error {
 func GetLiveStreamersByCate(c echo.Context) error {
 	cate := c.Param("category")
 	res := mongodb.GetCategoryList(cate)
+
+	return c.String(http.StatusOK, res)
+}
+
+// GetStreamersByPlatform func
+func GetStreamersByPlatform(c echo.Context) error {
+	platform := c.Param("platform")
+	res := mongodb.GetPlatformList(platform)
 
 	return c.String(http.StatusOK, res)
 }
