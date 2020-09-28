@@ -413,9 +413,9 @@ func InsertFeedback(cookie, title, email, message string) string {
 }
 
 // InsertUserHistory func
-func InsertUserHistory(cookie, username, pathname string, residencetime int) string {
+func InsertUserHistory(loginType, username, pathname string, residencetime int) string {
 	newData := m.UserHistory{
-		Cookie:        cookie,
+		LoginType:     loginType,
 		Username:      username,
 		Pathname:      pathname,
 		Residencetime: residencetime,
@@ -425,9 +425,9 @@ func InsertUserHistory(cookie, username, pathname string, residencetime int) str
 }
 
 // InsertViewHistory func
-func InsertViewHistory(cookie, username, streaming, platform, _uniq string) string {
+func InsertViewHistory(loginType, username, streaming, platform, _uniq string) string {
 	newData := m.UserViewHistory{
-		Cookie:    cookie,
+		LoginType: loginType,
 		Username:  username,
 		Streaming: streaming,
 		Platform:  platform,

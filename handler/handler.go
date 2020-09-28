@@ -236,25 +236,25 @@ func InsertFeedback(c echo.Context) error {
 // InsertUserHistory func
 func InsertUserHistory(c echo.Context) error {
 	//cookie := cookie.GetCookie(c)
-	cookie := "cookie"
+	loginType := c.FormValue("loginType")
 	username := c.FormValue("username")
 	pathname := c.FormValue("pathname")
 	residencetime, _ := strconv.Atoi(c.FormValue("residencetime"))
 
-	res := mongodb.InsertUserHistory(cookie, username, pathname, residencetime)
+	res := mongodb.InsertUserHistory(loginType, username, pathname, residencetime)
 	return c.String(http.StatusOK, res)
 }
 
 // InsertViewHistory func
 func InsertViewHistory(c echo.Context) error {
 	//cookie := cookie.GetCookie(c)
-	cookie := "cookie"
+	loginType := c.FormValue("loginType")
 	username := c.FormValue("username")
 	streaming := c.FormValue("streaming")
 	platform := c.FormValue("platform")
 	_uniq := c.FormValue("_uniq")
 
-	res := mongodb.InsertViewHistory(cookie, username, streaming, platform, _uniq)
+	res := mongodb.InsertViewHistory(loginType, username, streaming, platform, _uniq)
 	return c.String(http.StatusOK, res)
 }
 
