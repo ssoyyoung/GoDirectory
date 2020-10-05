@@ -1,2 +1,6 @@
-# GoDirectory
-how to build directory in Golang
+# MeerkatOnAir
+
+online Live Streaming Platform
+
+https://mkoa.sparker.kr
+
