@@ -102,16 +102,18 @@ type UserHistory struct {
 	Username      string             `bson:"username,omitempty"`
 	Pathname      string             `bson:"pathname,omitempty"`
 	Residencetime int                `bson:"residencetime,omitempty"`
+	UpdateDate    string             `bson:"updateDate,omitempty"`
 }
 
 // UserViewHistory struct
 type UserViewHistory struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty"`
-	LoginType string             `bson:"loginType,omitempty"`
-	Username  string             `bson:"username,omitempty"`
-	Streaming string             `bson:"streaming,omitempty"`
-	Platform  string             `bson:"platform,omitempty"`
-	Uniq      string             `bson:"_uniq,omitempty"`
+	ID         primitive.ObjectID `bson:"_id,omitempty"`
+	LoginType  string             `bson:"loginType,omitempty"`
+	Username   string             `bson:"username,omitempty"`
+	Streaming  string             `bson:"streaming,omitempty"`
+	Platform   string             `bson:"platform,omitempty"`
+	Uniq       string             `bson:"_uniq,omitempty"`
+	UpdateDate string             `bson:"updateDate,omitempty"`
 }
 
 // SignUp struct

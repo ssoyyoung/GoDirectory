@@ -1,6 +1,7 @@
 package mongo
 
 import (
+	"fmt"
 	"time"
 
 	m "github.com/ssoyyoung.p/GoDirectory/models"
@@ -414,11 +415,17 @@ func InsertFeedback(cookie, title, email, message string) string {
 
 // InsertUserHistory func
 func InsertUserHistory(loginType, username, pathname string, residencetime int) string {
+	t := time.Now()
+	formatted := fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d",
+		t.Year(), t.Month(), t.Day(),
+		t.Hour(), t.Minute(), t.Second())
+
 	newData := m.UserHistory{
 		LoginType:     loginType,
 		Username:      username,
 		Pathname:      pathname,
 		Residencetime: residencetime,
+		UpdateDate:    formatted,
 	}
 
 	return crud.InsertUserHistory(colNameUserHistory, newData)
@@ -426,12 +433,18 @@ func InsertUserHistory(loginType, username, pathname string, residencetime int) 
 
 // InsertViewHistory func
 func InsertViewHistory(loginType, username, streaming, platform, _uniq string) string {
+	t := time.Now()
+	formatted := fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d",
+		t.Year(), t.Month(), t.Day(),
+		t.Hour(), t.Minute(), t.Second())
+
 	newData := m.UserViewHistory{
-		LoginType: loginType,
-		Username:  username,
-		Streaming: streaming,
-		Platform:  platform,
-		Uniq:      _uniq,
+		LoginType:  loginType,
+		Username:   username,
+		Streaming:  streaming,
+		Platform:   platform,
+		Uniq:       _uniq,
+		UpdateDate: formatted,
 	}
 
 	return crud.InsertViewHistory(colNameUserViewHistory, newData)
