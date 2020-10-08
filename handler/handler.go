@@ -81,7 +81,7 @@ func GetStreamersByPlatform(c echo.Context) error {
 
 // GetAllCategory func
 func GetAllCategory(c echo.Context) error {
-	cateList := []string{"GAME", "MUSIC", "CHATTING", "SHOPPING", "NEWS", "AIR", "SPORTS", "COOKING"}
+	cateList := []string{"GAME", "MUSIC", "CHATTING", "SHOPPING", "NEWS & INFO", "AIR & RADIO", "SPORTS & EXERCISE", "COOKING"}
 
 	result := map[string]int{}
 	for _, cate := range cateList {
