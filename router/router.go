@@ -14,8 +14,6 @@ import (
 )
 
 // Router function
-// GET은 가져오는 것, POST는 수행하는 것
-// GET은 주소 뒤에 parameter가 붙고, POST는 body에 감싸져서 데이터를 보낸다.
 func Router() *echo.Echo {
 	e := echo.New()
 	e.Debug = true
