@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-
 	"github.com/labstack/echo"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 	"github.com/ssoyyoung.p/GoDirectory/utils"
@@ -239,9 +238,9 @@ func InsertUserHistory(c echo.Context) error {
 	loginType := c.FormValue("loginType")
 	username := c.FormValue("username")
 	pathname := c.FormValue("pathname")
-	residencetime, _ := strconv.Atoi(c.FormValue("residencetime"))
-
+	residencetime, _ := strconv.ParseFloat(c.FormValue("residencetime"), 64)
 	res := mongodb.InsertUserHistory(loginType, username, pathname, residencetime)
+	
 	return c.String(http.StatusOK, res)
 }
 

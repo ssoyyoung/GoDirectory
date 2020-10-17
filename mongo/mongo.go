@@ -414,7 +414,7 @@ func InsertFeedback(cookie, title, email, message string) string {
 }
 
 // InsertUserHistory func
-func InsertUserHistory(loginType, username, pathname string, residencetime int) string {
+func InsertUserHistory(loginType, username, pathname string, residencetime float64) string {
 	t := time.Now()
 	formatted := fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d",
 		t.Year(), t.Month(), t.Day(),

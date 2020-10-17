@@ -101,7 +101,7 @@ type UserHistory struct {
 	LoginType     string             `bson:"loginType,omitempty"`
 	Username      string             `bson:"username,omitempty"`
 	Pathname      string             `bson:"pathname,omitempty"`
-	Residencetime int                `bson:"residencetime,omitempty"`
+	Residencetime float64                `bson:"residencetime,omitempty"`
 	UpdateDate    string             `bson:"updateDate,omitempty"`
 }
 
