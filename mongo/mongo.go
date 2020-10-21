@@ -62,7 +62,7 @@ func LiveAllListByBlocking(blocking []string) string {
 
 	sort := bson.M{}
 
-	return crud.AllData(colNameLive, filter, sort)
+	return crud.AllDataReturnJson(colNameLive, filter, sort)
 }
 
 // LiveAllList func

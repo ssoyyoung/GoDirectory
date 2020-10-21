@@ -259,6 +259,10 @@ func GetBlocking(collection string, filter bson.M) []string {
 		fmt.Println(err)
 	}
 
+	if len(result) == 0 {
+		return nil
+	}
+
 	return result[0].Block
 }
 
