@@ -475,6 +475,12 @@ func SignUp(id, serialNo, password, nickname, birthday, t, gender string, tags, 
 
 // InsertSurvey func
 func InsertSurvey(s *m.Survey) string {
+	t := time.Now()
+	formatted := fmt.Sprintf("%d-%02d-%02d %02d:%02d:%02d",
+		t.Year(), t.Month(), t.Day(),
+		t.Hour(), t.Minute(), t.Second())
+
+	s.UpdateDate = formatted
 
 	return crud.InsertSurvey(colNameSurvey, s)
 }

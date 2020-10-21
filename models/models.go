@@ -134,8 +134,9 @@ type SignUp struct {
 
 // Survey struct
 type Survey struct {
-	Platform  []string
-	Category  []string
-	Streamers []string
-	Userinfo  string
+	Platform   []string `bson:"platform,omitempty"`
+	Category   []string `bson:"category,omitempty"`
+	Streamers  []string `bson:"streamers,omitempty"`
+	Userinfo   string   `bson:"userinfo,omitempty"`
+	UpdateDate string   `bson:"updateDate,omitempty"`
 }
