@@ -124,7 +124,7 @@ type SignUp struct {
 	Password  string             `bson:"password,omitempty"`
 	Nickname  string             `bson:"nickname,omitempty"`
 	Birthday  string             `bson:"birthday,omitempty"`
-	Gender    string             `bson:"birthday,omitempty"`
+	Gender    string             `bson:"gender,omitempty"`
 	Ctags     []string           `bson:"ctags,omitempty"`
 	Tags      []string           `bson:"tags,omitempty"`
 	Token     string             `bson:"token,omitempty"`
