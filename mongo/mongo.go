@@ -452,7 +452,7 @@ func InsertViewHistory(loginType, username, streaming, platform, _uniq string) s
 }
 
 // SignUp func
-func SignUp(id, serialNo, password, nickname, birthday, t string, tags, ctags []string) string {
+func SignUp(id, serialNo, password, nickname, birthday, t, gender string, tags, ctags []string) string {
 	following := []string{}
 	block := []string{}
 
@@ -462,6 +462,7 @@ func SignUp(id, serialNo, password, nickname, birthday, t string, tags, ctags []
 		Password:  password,
 		Nickname:  nickname,
 		Birthday:  birthday,
+		Gender:    gender,
 		Ctags:     ctags,
 		Tags:      tags,
 		Token:     t,

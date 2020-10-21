@@ -47,7 +47,7 @@ func contains(v string, a []string) bool {
 
 // SignUp func
 func SignUp(c echo.Context) error {
-	id, serialNo, password, nickname, birthday, tags, ctags := c.FormValue("id"), c.FormValue("serialNo"), c.FormValue("password"), c.FormValue("nickname"), c.FormValue("birthday"), c.FormValue("tags"), c.FormValue("ctags")
+	id, serialNo, password, nickname, birthday, tags, ctags, gender := c.FormValue("id"), c.FormValue("serialNo"), c.FormValue("password"), c.FormValue("nickname"), c.FormValue("birthday"), c.FormValue("tags"), c.FormValue("ctags"), c.FormValue("gender")
 	tagList := strings.Split(tags, ",")
 	ctagList := strings.Split(ctags, ",")
 
@@ -62,7 +62,7 @@ func SignUp(c echo.Context) error {
 		return err
 	}
 
-	mongodb.SignUp(id, serialNo, password, nickname, birthday, t, tagList, ctagList)
+	mongodb.SignUp(id, serialNo, password, nickname, birthday, t, gender, tagList, ctagList)
 	return c.JSON(http.StatusOK, map[string]interface{}{
 		"token":     t,
 		"token_exp": claims["exp"],
