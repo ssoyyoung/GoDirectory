@@ -287,11 +287,6 @@ func GetSurveyData(c echo.Context) error {
 		return c.String(http.StatusBadRequest, "not saved")
 	}
 
-	platform := s.Platform
-	category := s.Category
-	streamers := s.Streamers
-	userInfo := s.Userinfo
-
 	res := mongodb.InsertSurvey(s)
 
 	return c.String(http.StatusOK, res)
