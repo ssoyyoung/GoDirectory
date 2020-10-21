@@ -292,8 +292,6 @@ func GetSurveyData(c echo.Context) error {
 	streamers := s.Streamers
 	userInfo := s.Userinfo
 
-	fmt.Println(platform, category, streamers, userInfo)
-
 	res := mongodb.InsertSurvey(s)
 
 	return c.String(http.StatusOK, res)
