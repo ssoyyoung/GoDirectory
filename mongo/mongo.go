@@ -18,6 +18,7 @@ const colNameFeedback = "feedback"
 const colNameUserHistory = "userHistory"
 const colNameUserViewHistory = "userViewHistory"
 const colNameSignUp = "userList"
+const colNameSurvey = "user_Survey"
 
 // LiveTrueList func
 func LiveTrueList() string {
@@ -469,4 +470,10 @@ func SignUp(id, serialNo, password, nickname, birthday, t string, tags, ctags []
 	}
 
 	return crud.CreateSignUpUser(colNameSignUp, signUpData)
+}
+
+// InsertSurvey func
+func InsertSurvey(s *m.Survey) string {
+
+	return crud.InsertSurvey(colNameSurvey, s)
 }

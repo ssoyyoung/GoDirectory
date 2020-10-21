@@ -369,3 +369,15 @@ func InsertViewHistory(collection string, newData m.UserViewHistory) string {
 
 	return "Done!"
 }
+
+// InsertSurvey func
+func InsertSurvey(collection string, survey *m.Survey) string {
+	client, ctx, cancel := ConnectDB()
+	defer client.Disconnect(ctx)
+	defer cancel()
+
+	_, err := GetCollection(client, collection).InsertOne(ctx, survey)
+	U.CheckErr(err)
+
+	return "saved"
+}

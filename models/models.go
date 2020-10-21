@@ -101,7 +101,7 @@ type UserHistory struct {
 	LoginType     string             `bson:"loginType,omitempty"`
 	Username      string             `bson:"username,omitempty"`
 	Pathname      string             `bson:"pathname,omitempty"`
-	Residencetime float64                `bson:"residencetime,omitempty"`
+	Residencetime float64            `bson:"residencetime,omitempty"`
 	UpdateDate    string             `bson:"updateDate,omitempty"`
 }
 
@@ -129,4 +129,12 @@ type SignUp struct {
 	Token     string             `bson:"token,omitempty"`
 	Following []string           `bson:"following"`
 	Block     []string           `bson:"block"`
+}
+
+// Survey struct
+type Survey struct {
+	Platform  []string
+	Category  []string
+	Streamers []string
+	Userinfo  string
 }

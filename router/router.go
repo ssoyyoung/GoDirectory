@@ -103,5 +103,10 @@ func Router() *echo.Echo {
 		ck.GET("/get", cookie.GetCookieTest)
 	}
 
+	survey := e.Group("survey")
+	{
+		survey.POST("/save", handler.GetSurveyData)
+	}
+
 	return e
 }

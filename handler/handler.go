@@ -5,7 +5,9 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+
 	"github.com/labstack/echo"
+	m "github.com/ssoyyoung.p/GoDirectory/models"
 	mongodb "github.com/ssoyyoung.p/GoDirectory/mongo"
 	"github.com/ssoyyoung.p/GoDirectory/utils"
 )
@@ -240,7 +242,7 @@ func InsertUserHistory(c echo.Context) error {
 	pathname := c.FormValue("pathname")
 	residencetime, _ := strconv.ParseFloat(c.FormValue("residencetime"), 64)
 	res := mongodb.InsertUserHistory(loginType, username, pathname, residencetime)
-	
+
 	return c.String(http.StatusOK, res)
 }
 
@@ -275,4 +277,24 @@ func CheckID(c echo.Context) error {
 	}
 	//return c.String(http.StatusOK, status+res)
 	return c.JSON(http.StatusOK, rData)
+}
+
+// GetSurveyData func
+func GetSurveyData(c echo.Context) error {
+	s := new(m.Survey)
+
+	if err := c.Bind(s); err != nil {
+		return c.String(http.StatusBadRequest, "not saved")
+	}
+
+	platform := s.Platform
+	category := s.Category
+	streamers := s.Streamers
+	userInfo := s.Userinfo
+
+	fmt.Println(platform, category, streamers, userInfo)
+
+	res := mongodb.InsertSurvey(s)
+
+	return c.String(http.StatusOK, res)
 }
